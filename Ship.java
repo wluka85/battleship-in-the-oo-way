@@ -1,12 +1,12 @@
-public class Ship {
-    private List<Square> ship = new ArrayList<>();
+public class ships {
+    private List<Square> ships = new ArrayList<>();
     private int x;
     private int y;
     private int shipLength;
     private boolean vertical;
 
 
-    public Ship(int x, int y, int shipLength) {
+    public ships(int x, int y, int shipLength) {
         this.x = x;
         this.y = y;
         this.shipLength = shipLength;
@@ -15,7 +15,7 @@ public class Ship {
     }
 
 
-    public Ship(int x, int y, int shipLength, boolean vertical) {
+    public ships(int x, int y, int shipLength, boolean vertical) {
         this.x = x;
         this.y = y;
         this.shipLength = shipLength;
@@ -26,24 +26,24 @@ public class Ship {
 
     private makeShip() {
         for (int i = 0; i < shipLength; i++) {
-            if (vertical == true) ship.add(new Square(x, y + i));
+            if (vertical == true) ships.add(new Square(x, y + i));
 
-            else ship.add(new Square(x + i, y));
+            else ships.add(new Square(x + i, y));
         }
     }
 
 
     public int getShipSize() {
-        return ship.size();
+        return ships.size();
     }
 
 
     public int getXOfSquare(int indexSquare) {
-        return ship.get(indexSquare).getX();
+        return ships.get(indexSquare).getX();
     }
 
 
     public int getYOfSquare(int indexSquare) {
-        return ship.get(indexSquare).getY();
+        return ships.get(indexSquare).getY();
     }
 }
