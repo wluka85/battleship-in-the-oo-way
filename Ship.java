@@ -31,4 +31,19 @@ public class Ship {
             else ship.add(new Square(x + i, y));
         }
     }
+
+
+    public int getShipSize() {
+        return ship.size();
+    }
+
+
+    public int getXOfSquare(int indexSquare) {
+        return ship.get(indexSquare).getX();
+    }
+
+
+    public int getYOfSquare(int indexSquare) {
+        return ship.get(indexSquare).getY();
+    }
 }

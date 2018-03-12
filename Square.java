@@ -9,12 +9,12 @@ public class Square {
     }
 
 
-    public int getIndexX() {
+    public int getX() {
         return x;
     }
 
 
-    public int getIndexY() {
+    public int getY() {
         return y;
     }
 }
