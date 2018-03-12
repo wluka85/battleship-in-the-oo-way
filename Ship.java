@@ -46,4 +46,9 @@ public class Ship {
     public int getYOfSquare(int indexSquare) {
         return ships.get(indexSquare).getY();
     }
+
+
+    public boolean getVertical() {
+        return vertical;
+    }
 }
