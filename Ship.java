@@ -1,4 +1,4 @@
-public class ships {
+public class Ship {
     private List<Square> ships = new ArrayList<>();
     private int x;
     private int y;
