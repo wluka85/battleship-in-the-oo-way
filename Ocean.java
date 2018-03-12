@@ -14,6 +14,7 @@ public class Ocean {
 
     public void addShip(Ship ship) {
         ships.add(ship);
+        addShipToOcean(ship);
     }
 
 
