@@ -8,12 +8,12 @@ public class OceanValidator {
 
         boolean valid = true;
 
-        lastPart = ship.shipLength - 1;
+        lastPart = ship.getShipSize() - 1;
         boolean vertical = ship.getVertical();
         for (int i = 0; i < ship.getShipSize(); i++) {
 
-            int x = getXOfSquare(i);
-            int y = getYOfSquare(i);
+            int x = ship.getXOfSquare(i);
+            int y = ship.getYOfSquare(i);
 
             if (vertical) {
                 valid = checkVerticalSquare(ocean, x, y, i);
@@ -44,7 +44,7 @@ public class OceanValidator {
             return false;
         }
 
-        if (part = 0 && x-1 >= 0) {
+        if (part == 0 && x-1 >= 0) {
             // If there is Ship on left:
             if (ocean[x - 1][y].equals("S")) {
                 return false;
@@ -61,7 +61,7 @@ public class OceanValidator {
             }
         }
 
-        if (part = lastPart && x + 1 < OCEAN_SIZE) {
+        if (part == lastPart && x + 1 < OCEAN_SIZE) {
             // If there is Ship on right:
             if (ocean[x + 1][y].equals("S")) {
                 return false;
