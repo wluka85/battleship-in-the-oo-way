@@ -8,6 +8,7 @@ public class Ship {
     private int y;
     private int shipLength;
     private boolean vertical;
+    private int healthPressure;
 
 
     public Ship(int x, int y, int shipLength) {
@@ -15,6 +16,7 @@ public class Ship {
         this.y = y;
         this.shipLength = shipLength;
         vertical = false;
+        healthPressure = shipLength;
         makeShip();
     }
 
@@ -54,5 +56,25 @@ public class Ship {
 
     public boolean getVertical() {
         return vertical;
+    }
+
+
+    public void decrementHealthPressure() {
+      healthPressure -= 1;
+    }
+
+
+    public int getHealthPressure() {
+      return healthPressure;
+    }
+
+
+    public boolean checkIfShip(int x, int y) {
+      for (int i = 0; i < shipParts.size(); i++) {
+        if (getXOfSquare(i) == x && getYOfSquare(i) == y) {
+          return true;
+        }
+      }
+      return false;
     }
 }
