@@ -1,3 +1,7 @@
+import java.util.List;
+import java.util.ArrayList;
+
+
 public class Ship {
     private List<Square> shipParts = new ArrayList<>();
     private int x;
@@ -24,7 +28,7 @@ public class Ship {
     }
 
 
-    private makeShip() {
+    private void makeShip() {
         for (int i = 0; i < shipLength; i++) {
             if (vertical == true) shipParts.add(new Square(x, y + i));
 
