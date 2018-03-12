@@ -14,7 +14,7 @@ public class OceanValidator {
             if (vertical) {
                 valid = checkVerticalSquare(ocean, x, y, i);
             } else {
-                valid = checkHorizontalSquare
+                valid = checkHorizontalSquare(ocean, x, y, i);
             }
         }
 
