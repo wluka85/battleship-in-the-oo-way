@@ -35,15 +35,15 @@ public class OceanValidator {
          * Every part checks Squares above and below
          * Fist and Last part also checks Squares on sides
          */
+                
+        if (y + 1 < OCEAN_SIZE && ocean[x][y + 1].equals("S")) {
+            return false;
+        }
+
+        if (y - 1 >= 0 && ocean[x][y - 1].equals("S")) {
+            return false;
+        }
         
-        if (x + 1 < OCEAN_SIZE && ocean[x + 1][y].equals("S")) {
-            return false;
-        }
-
-        if (x - 1 >= 0 && ocean[x - 1][y].equals("S")) {
-            return false;
-        }
-
         if (part == 0 && x-1 >= 0) {
             // If there is Ship on left:
             if (ocean[x - 1][y].equals("S")) {
@@ -89,12 +89,12 @@ public class OceanValidator {
          * Every part checks Squares on sides (left & right)
          * Fist and Last part also checks Squares above and below
          */
-        
-        if (y + 1 < OCEAN_SIZE && ocean[x][y + 1].equals("S")) {
+
+        if (x + 1 < OCEAN_SIZE && ocean[x + 1][y].equals("S")) {
             return false;
         }
 
-        if (y - 1 >= 0 && ocean[x][y - 1].equals("S")) {
+        if (x - 1 >= 0 && ocean[x - 1][y].equals("S")) {
             return false;
         }
 
