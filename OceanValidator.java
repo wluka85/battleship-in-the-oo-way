@@ -80,4 +80,58 @@ public class OceanValidator {
         return true;
     }
 
+    private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
+        /**
+         * Function checks if 'ship' oriented horizontally 
+         * is placed accordingly to game rules
+         * (isn't touching any other ship)
+         * 
+         * Every part checks Squares on sides (left & right)
+         * Fist and Last part also checks Squares above and below
+         */
+        
+        if (y + 1 < OCEAN_SIZE && ocean[x][y + 1].equals("S")) {
+            return false;
+        }
+
+        if (y - 1 >= 0 && ocean[x][y - 1].equals("S")) {
+            return false;
+        }
+
+        if (part == 0 && y - 1 >= 0) {
+            // If there is Ship on top-left:
+            if (x - 1 >= 0 && ocean[x - 1][y - 1].equals("S")) {
+                return false;
+            }
+
+            // If there is Ship above:
+            if (ocean[x][y - 1].equals("S")) {
+                return false;
+            }
+
+            // If there is Ship on top-right:
+            if (x + 1 < OCEAN_SIZE && ocean[x + 1][y - 1].equals("S")) {
+                return false;
+            }
+        }
+
+        if (part == lastPart && y + 1 <  OCEAN_SIZE) {
+            // If there is Ship on bottom-left:
+            if (x - 1 >= 0 && ocean[x - 1][y + 1].equals("S")) {
+                return false;
+            }
+
+            // If there is Ship below:
+            if (ocean[x][y + 1].equals("S")) {
+                return false;
+            }
+
+            // If there is Ship on bottom-right:
+            if (x + 1 < OCEAN_SIZE && ocean[x + 1][y + 1].equals("S")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
