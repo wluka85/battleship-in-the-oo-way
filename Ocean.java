@@ -14,9 +14,9 @@ public class Ocean {
 
 
     private void addShipToOcean(Ship ship) {
-        for (int i = 0; i < ship.getShipSize(); i++) {
-            int indexX = ship.getXOfSquare(i);
-            int indexY = ship.getYOfSquare(i);
+        for (int i = 0; i < ships.getShipSize(); i++) {
+            int indexX = ships.getXOfSquare(i);
+            int indexY = ships.getYOfSquare(i);
             ocean[indexX][indexY] = "s";
         }
     }
