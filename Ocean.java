@@ -17,8 +17,11 @@ public class Ocean {
 
 
     public void addShip(Ship ship) {
-        ships.add(ship);
-        addShipToOcean(ship);
+        boolean valid = OceanValidator.validateOcean(ocean, ship);
+        if (valid) {
+            ships.add(ship);
+            addShipToOcean(ship);
+        }
     }
 
 
