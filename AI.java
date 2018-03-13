@@ -6,6 +6,8 @@ public class AI {
     private String[][] enemyBoard = new String[10][10];
     public Ocean ocean;
     private int level;
+    private boolean huntMode = false;
+    // huntMode is used only by AI on level 3
 
     public AI (Ocean ocean, int level) {
         this.ocean = ocean;
@@ -136,6 +138,7 @@ public class AI {
         switch (shootResult) {
             case "Hit":
                 handleHit(x, y);
+                huntMode = true;
                 break;
             case "Hit and sunk":
                 handleHitAndSunk(x, y);
@@ -146,8 +149,13 @@ public class AI {
         }
     }
 
-    private void hardAIMove(Ocean enemOcean) {
+    private void hardAIMove(Ocean enemyOcean) {
 
+        if (huntMode) {
+            attackDamagedShip(enemyOcean);
+        } else {
+            mediumAIMove(enemyOcean);
+        }
     }
 
     private void handleHit(int x, int y) {
