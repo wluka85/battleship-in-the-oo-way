@@ -143,4 +143,25 @@ public class AI {
                 break;
         }
     }
+
+    private void handleHit(int x, int y) {
+
+        enemyBoard[x][y] = "X";
+
+        if (x - 1 >= 0 && y - 1 >= 0) {
+            enemyBoard[x-1][y-1] = "O";
+        }
+
+        if (x - 1 >= 0 && y + 1 < OCEAN_SIZE) {
+            enemyBoard[x-1][y+1] = "O";
+        }
+
+        if (x + 1 < OCEAN_SIZE && y - 1 >= 0) {
+            enemyBoard[x+1][y-1] = "O";
+        }
+
+        if (x + 1 < OCEAN_SIZE && y + 1 < OCEAN_SIZE) {
+            enemyBoard[x+1][y+1] = "O";
+        }
+    }
 }
