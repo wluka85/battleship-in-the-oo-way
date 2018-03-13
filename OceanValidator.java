@@ -15,10 +15,12 @@ public class OceanValidator {
             int x = ship.getXOfSquare(i);
             int y = ship.getYOfSquare(i);
 
-            if (vertical) {
-                valid = checkVerticalSquare(ocean, x, y, i);
-            } else {
-                valid = checkHorizontalSquare(ocean, x, y, i);
+            if (valid) {
+                if (vertical) {
+                    valid = checkVerticalSquare(ocean, x, y, i);
+                } else {
+                    valid = checkHorizontalSquare(ocean, x, y, i);
+                }
             }
         }
 
