@@ -1,7 +1,8 @@
+import java.util.Random;
 
 public class AI {
 
-    private String[][] enemyOcean = new board[10][10];
+    private String[][] enemyOcean = new String[10][10];
     public Ocean ocean;
 
     public AI (Ocean ocean) {
@@ -10,7 +11,20 @@ public class AI {
     }
     
     private void addShipsToOcean() {
-        Ship carrier = new Ship();
+        addCarrier();
+    }
+
+    private void addCarrier() {
+        Ship carrier;
+        boolean validShipLocation;
+        do {
+            Random generator = new Random();
+            int x = generator.nextInt(10);
+            int y = generator.nextInt(10);
+            carrier = new Ship(x, y, 5);
+            validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), carrier);
+        } while (!validShipLocation);
+        ocean.addShip(carrier);
     }
 
     public void takeATurn() {
