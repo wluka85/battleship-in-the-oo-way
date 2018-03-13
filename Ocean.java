@@ -54,4 +54,9 @@ public class Ocean {
         return "Miss";
       }
     }
+
+
+    public String[][] getOceanBoard() {
+        return ocean;
+    }
 }
