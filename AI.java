@@ -82,16 +82,16 @@ public class AI {
 
     private void easyAIMove(Ocean enemyOcean) {
 
-        boolean unknownSquare;
+        boolean isWater;
         do {
             Random generator = new Random();
             int x = generator.nextInt(OCEAN_SIZE);
             int y = generator.nextInt(OCEAN_SIZE);
 
-            unknownSquare = board[x][y].equals(" ");
+            isWater = board[x][y].equals(" ");
 
-        }while(!unknownSquare);
+        }while(!isWater);
 
-        
+
     }
 }
