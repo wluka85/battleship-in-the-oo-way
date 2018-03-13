@@ -49,8 +49,4 @@ public class HandleGame {
 
         }while(!endOfGame);
     }
-
-    public String takeAShot(int x, int y, Ocean ocean) {
-
-    }
 }
