@@ -91,15 +91,27 @@ public class AI {
 
     private void easyAIMove(Ocean enemyOcean) {
 
+        int x, y;
         boolean isWater;
         do {
             Random generator = new Random();
-            int x = generator.nextInt(OCEAN_SIZE);
-            int y = generator.nextInt(OCEAN_SIZE);
+            x = generator.nextInt(OCEAN_SIZE);
+            y = generator.nextInt(OCEAN_SIZE);
 
             isWater = enemyBoard[x][y].equals(" ");
 
         }while(!isWater);
 
+        String shootResult = enemyOcean.takeShot(x, y);
+
+        switch (shootResult) {
+            case "Hit":
+            case "Hit and sunk":
+                enemyBoard[x][y] = "X";
+                break;
+            case "Miss":
+                enemyBoard[x][y] = "O";
+                break;
+        }
     }
 }
