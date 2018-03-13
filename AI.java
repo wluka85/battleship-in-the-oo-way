@@ -172,4 +172,15 @@ public class AI {
         markLeft(x, y);
         markRight(x, y);
     }
+
+    private void markTop(int x, int y) {
+        for (int i = y; i >= 0; i--) {
+            if (enemyBoard[x][i].equals("X")){
+                continue;
+            } else {
+                enemyBoard[x][i] = "O";
+                break;
+            }
+        }
+    }
 }
