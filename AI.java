@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class AI {
 
+    private static final int OCEAN_SIZE = 10;
     private String[][] enemyOcean = new String[10][10];
     public Ocean ocean;
 
@@ -24,8 +25,8 @@ public class AI {
         boolean validShipLocation;
         do {
             Random generator = new Random();
-            int x = generator.nextInt(10);
-            int y = generator.nextInt(10);
+            int x = generator.nextInt(OCEAN_SIZE);
+            int y = generator.nextInt(OCEAN_SIZE);
             carrier = new Ship(x, y, 5);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), carrier);
         } while (!validShipLocation);
@@ -37,8 +38,8 @@ public class AI {
         boolean validShipLocation;
         do {
             Random generator = new Random();
-            int x = generator.nextInt(10);
-            int y = generator.nextInt(10);
+            int x = generator.nextInt(OCEAN_SIZE);
+            int y = generator.nextInt(OCEAN_SIZE);
             battleship = new Ship(x, y, 4);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), battleship);
         } while (!validShipLocation);
@@ -50,8 +51,8 @@ public class AI {
         boolean validShipLocation;
         do {
             Random generator = new Random();
-            int x = generator.nextInt(10);
-            int y = generator.nextInt(10);
+            int x = generator.nextInt(OCEAN_SIZE);
+            int y = generator.nextInt(OCEAN_SIZE);
             cruiser = new Ship(x, y, 3);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), cruiser);
         } while (!validShipLocation);
@@ -63,8 +64,8 @@ public class AI {
         boolean validShipLocation;
         do {
             Random generator = new Random();
-            int x = generator.nextInt(10);
-            int y = generator.nextInt(10);
+            int x = generator.nextInt(OCEAN_SIZE);
+            int y = generator.nextInt(OCEAN_SIZE);
             destroyer = new Ship(x, y, 2);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), destroyer);
         } while (!validShipLocation);
