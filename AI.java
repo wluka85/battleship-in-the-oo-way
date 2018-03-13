@@ -88,6 +88,8 @@ public class AI {
             easyAIMove(enemyOcean);
         } else if (level == 2) {
             mediumAIMove(enemyOcean);
+        } else if (level == 3) {
+            hardAIMove(enemOcean);
         }
     }
 
@@ -142,6 +144,10 @@ public class AI {
                 enemyBoard[x][y] = "O";
                 break;
         }
+    }
+
+    private void hardAIMove(Ocean enemOcean) {
+
     }
 
     private void handleHit(int x, int y) {
