@@ -12,6 +12,8 @@ public class AI {
     
     private void addShipsToOcean() {
         addCarrier();
+        addBattleship();
+
     }
 
     private void addCarrier() {
@@ -25,6 +27,19 @@ public class AI {
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), carrier);
         } while (!validShipLocation);
         ocean.addShip(carrier);
+    }
+
+    private void addBattleship() {
+        Ship battleship;
+        boolean validShipLocation;
+        do {
+            Random generator = new Random();
+            int x = generator.nextInt(10);
+            int y = generator.nextInt(10);
+            battleship = new Ship(x, y, 5);
+            validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), battleship);
+        } while (!validShipLocation);
+        ocean.addShip(battleship);
     }
 
     public void takeATurn() {
