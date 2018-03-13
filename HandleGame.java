@@ -49,4 +49,17 @@ public class HandleGame {
 
         }while(!endOfGame);
     }
+
+    private boolean checkIfGameOver(Ocean ocean) {
+        String[][] board = ocean.getOceanBoard();
+        for (String[] row : board) {
+            for (String square : row) {
+                if (square.equals("S")) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }
