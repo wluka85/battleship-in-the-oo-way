@@ -9,7 +9,7 @@ public class AI {
     private boolean huntMode = false;
     // huntMode is used only by AI on level 3
 
-    public AI (Ocean ocean, int level) {
+    public AI(Ocean ocean, int level) {
         this.ocean = ocean;
         this.level = level;
         fillEnemyBoard();
@@ -106,18 +106,18 @@ public class AI {
 
             isWater = enemyBoard[x][y].equals(" ");
 
-        }while(!isWater);
+        } while (!isWater);
 
         String shootResult = enemyOcean.takeShot(x, y);
 
         switch (shootResult) {
-            case "Hit":
-            case "Hit and sunk":
-                enemyBoard[x][y] = "X";
-                break;
-            case "Miss":
-                enemyBoard[x][y] = "O";
-                break;
+        case "Hit":
+        case "Hit and sunk":
+            enemyBoard[x][y] = "X";
+            break;
+        case "Miss":
+            enemyBoard[x][y] = "O";
+            break;
         }
     }
 
@@ -131,21 +131,21 @@ public class AI {
 
             isWater = enemyBoard[x][y].equals(" ");
 
-        }while(!isWater);
+        } while (!isWater);
 
         String shootResult = enemyOcean.takeShot(x, y);
 
         switch (shootResult) {
-            case "Hit":
-                handleHit(x, y);
-                huntMode = true;
-                break;
-            case "Hit and sunk":
-                handleHitAndSunk(x, y);
-                break;
-            case "Miss":
-                enemyBoard[x][y] = "O";
-                break;
+        case "Hit":
+            handleHit(x, y);
+            huntMode = true;
+            break;
+        case "Hit and sunk":
+            handleHitAndSunk(x, y);
+            break;
+        case "Miss":
+            enemyBoard[x][y] = "O";
+            break;
         }
     }
 
@@ -162,7 +162,7 @@ public class AI {
 
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
-                if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)){
+                if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)) {
                     attackAdjacent(x, y, enemyOcean);
                 }
             }
@@ -175,19 +175,19 @@ public class AI {
         enemyBoard[x][y] = "X";
 
         if (x - 1 >= 0 && y - 1 >= 0) {
-            enemyBoard[x-1][y-1] = "O";
+            enemyBoard[x - 1][y - 1] = "O";
         }
 
         if (x - 1 >= 0 && y + 1 < OCEAN_SIZE) {
-            enemyBoard[x-1][y+1] = "O";
+            enemyBoard[x - 1][y + 1] = "O";
         }
 
         if (x + 1 < OCEAN_SIZE && y - 1 >= 0) {
-            enemyBoard[x+1][y-1] = "O";
+            enemyBoard[x + 1][y - 1] = "O";
         }
 
         if (x + 1 < OCEAN_SIZE && y + 1 < OCEAN_SIZE) {
-            enemyBoard[x+1][y+1] = "O";
+            enemyBoard[x + 1][y + 1] = "O";
         }
     }
 
@@ -201,7 +201,7 @@ public class AI {
 
     private void markTop(int x, int y) {
         for (int i = y; i >= 0; i--) {
-            if (enemyBoard[x][i].equals("X")){
+            if (enemyBoard[x][i].equals("X")) {
                 continue;
             } else {
                 enemyBoard[x][i] = "O";
@@ -212,7 +212,7 @@ public class AI {
 
     private void markDown(int x, int y) {
         for (int i = y; i < OCEAN_SIZE; i++) {
-            if (enemyBoard[x][i].equals("X")){
+            if (enemyBoard[x][i].equals("X")) {
                 continue;
             } else {
                 enemyBoard[x][i] = "O";
@@ -223,7 +223,7 @@ public class AI {
 
     private void markLeft(int x, int y) {
         for (int i = x; i >= 0; i--) {
-            if (enemyBoard[i][y].equals("X")){
+            if (enemyBoard[i][y].equals("X")) {
                 continue;
             } else {
                 enemyBoard[i][y] = "O";
@@ -234,7 +234,7 @@ public class AI {
 
     private void markRight(int x, int y) {
         for (int i = x; i < OCEAN_SIZE; i++) {
-            if (enemyBoard[i][y].equals("X")){
+            if (enemyBoard[i][y].equals("X")) {
                 continue;
             } else {
                 enemyBoard[i][y] = "O";
@@ -244,51 +244,49 @@ public class AI {
     }
 
     private boolean hasUncheckedAdjacent(int x, int y) {
-        return (uncheckedLeft(x, y) || uncheckedRight(x, y) ||
-                 uncheckedTop(x, y) || uncheckedBottom(x, y));
+        return (uncheckedLeft(x, y) || uncheckedRight(x, y) || uncheckedTop(x, y) || uncheckedBottom(x, y));
     }
 
     private boolean uncheckedLeft(int x, int y) {
-        return (x - 1 >= 0 && enemyBoard[x-1][y].equals(" "));
+        return (x - 1 >= 0 && enemyBoard[x - 1][y].equals(" "));
     }
 
     private boolean uncheckedRight(int x, int y) {
-        return (x + 1 < OCEAN_SIZE && enemyBoard[x+1][y].equals(" "));
+        return (x + 1 < OCEAN_SIZE && enemyBoard[x + 1][y].equals(" "));
     }
 
-    private boolean uncheckedTop (int x, int y) {
-        return (y - 1 >= 0 && enemyBoard[x][y-1].equals(" "));
+    private boolean uncheckedTop(int x, int y) {
+        return (y - 1 >= 0 && enemyBoard[x][y - 1].equals(" "));
     }
 
-    private boolean uncheckedBottom (int x, int y) {
-        return (y + 1 < OCEAN_SIZE && enemyBoard[x-1][y].equals(" "));
+    private boolean uncheckedBottom(int x, int y) {
+        return (y + 1 < OCEAN_SIZE && enemyBoard[x - 1][y].equals(" "));
     }
 
     private void attackAdjacent(int x, int y, Ocean enemyOcean) {
 
         String shootResult;
         if (uncheckedLeft(x, y)) {
-            shootResult = enemyOcean.takeShot(x-1, y);
+            shootResult = enemyOcean.takeShot(x - 1, y);
         } else if (uncheckedRight(x, y)) {
-            shootResult = enemyOcean.takeShot(x+1, y);
+            shootResult = enemyOcean.takeShot(x + 1, y);
         } else if (uncheckedTop(x, y)) {
-            shootResult = enemyOcean.takeShot(x, y-1);
+            shootResult = enemyOcean.takeShot(x, y - 1);
         } else {
-            shootResult = enemyOcean.takeShot(x, y+1);
+            shootResult = enemyOcean.takeShot(x, y + 1);
         }
 
-
         switch (shootResult) {
-            case "Hit":
-                handleHit(x, y);
-                break;
-            case "Hit and sunk":
-                handleHitAndSunk(x, y);
-                huntMode = false;
-                break;
-            case "Miss":
-                enemyBoard[x][y] = "O";
-                break;
+        case "Hit":
+            handleHit(x, y);
+            break;
+        case "Hit and sunk":
+            handleHitAndSunk(x, y);
+            huntMode = false;
+            break;
+        case "Miss":
+            enemyBoard[x][y] = "O";
+            break;
         }
     }
 }
