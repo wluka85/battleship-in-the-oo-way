@@ -14,6 +14,7 @@ public class AI {
         addCarrier();
         addBattleship();
         addCruiser();
+        addCruiser();
 
     }
 
