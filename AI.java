@@ -244,24 +244,29 @@ public class AI {
     }
 
     private boolean hasUncheckedAdjacent(int x, int y) {
-        if (x - 1 >= 0 && enemyBoard[x-1][y].equals(" ")){
-            return true;
-        }
-        if (x + 1 < OCEAN_SIZE && enemyBoard[x+1][y].equals(" ")) {
-            return true;
-        }
-        if (y - 1 >= 0 && enemyBoard[x][y-1].equals(" ")) {
-            return true;
-        }
-        if (y + 1 < OCEAN_SIZE && enemyBoard[x-1][y].equals(" ")) {
-            return true;
-        }
-        return false;
+        return (uncheckedLeft(x, y) || uncheckedRight(x, y) ||
+                 uncheckedTop(x, y) || uncheckedBottom(x, y));
+    }
+
+    private boolean uncheckedLeft(int x, int y) {
+        return (x - 1 >= 0 && enemyBoard[x-1][y].equals(" "));
+    }
+
+    private boolean uncheckedRight(int x, int y) {
+        return (x + 1 < OCEAN_SIZE && enemyBoard[x+1][y].equals(" "));
+    }
+
+    private boolean uncheckedTop (int x, int y) {
+        return (y - 1 >= 0 && enemyBoard[x][y-1].equals(" "));
+    }
+
+    private boolean uncheckedBottom (int x, int y) {
+        return (y + 1 < OCEAN_SIZE && enemyBoard[x-1][y].equals(" "));
     }
 
     private void attackAdjacent(int x, int y, Ocean enemyOcean) {
 
-        
+
         
     }
 }
