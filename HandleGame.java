@@ -43,7 +43,7 @@ public class HandleGame {
         int turn = 0;
         do {
             Ocean oceanOfEnemy = oceans.get((turn + 1) % 2);
-            players.get(turn%2).takeAShot(oceanOfEnemy);
+            players.get(turn%2).takeATurn(oceanOfEnemy);
             endOfGame = checkIfGameOver(oceanOfEnemy);
             turn++;
 
