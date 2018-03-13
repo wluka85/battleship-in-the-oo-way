@@ -39,7 +39,7 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(10);
             int y = generator.nextInt(10);
-            battleship = new Ship(x, y, 5);
+            battleship = new Ship(x, y, 4);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), battleship);
         } while (!validShipLocation);
         ocean.addShip(battleship);
@@ -52,7 +52,7 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(10);
             int y = generator.nextInt(10);
-            cruiser = new Ship(x, y, 5);
+            cruiser = new Ship(x, y, 3);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), cruiser);
         } while (!validShipLocation);
         ocean.addShip(cruiser);
@@ -65,7 +65,7 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(10);
             int y = generator.nextInt(10);
-            destroyer = new Ship(x, y, 5);
+            destroyer = new Ship(x, y, 2);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), destroyer);
         } while (!validShipLocation);
         ocean.addShip(destroyer);
