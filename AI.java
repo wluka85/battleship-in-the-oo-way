@@ -74,13 +74,13 @@ public class AI {
         ocean.addShip(destroyer);
     }
 
-    public void takeATurn() {
+    public void takeATurn(Ocean enemyOcean) {
         if (level == 1) {
-            easyAIMove();
+            easyAIMove(enemyOcean);
         }
     }
 
-    private void easyAIMove() {
+    private void easyAIMove(Ocean enemyOcean) {
 
         boolean unknownSquare;
         do {
@@ -92,6 +92,6 @@ public class AI {
 
         }while(!unknownSquare);
 
-
+        
     }
 }
