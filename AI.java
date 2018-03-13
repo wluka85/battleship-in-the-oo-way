@@ -266,7 +266,29 @@ public class AI {
 
     private void attackAdjacent(int x, int y, Ocean enemyOcean) {
 
+        String shootResult;
+        if (uncheckedLeft(x, y)) {
+            shootResult = enemyOcean.takeShot(x-1, y);
+        } else if (uncheckedRight(x, y)) {
+            shootResult = enemyOcean.takeShot(x+1, y);
+        } else if (uncheckedTop(x, y)) {
+            shootResult = enemyOcean.takeShot(x, y-1);
+        } else {
+            shootResult = enemyOcean.takeShot(x, y+1);
+        }
 
+
+        switch (shootResult) {
+            case "Hit":
+                handleHit(x, y);
+                break;
+            case "Hit and sunk":
+                handleHitAndSunk(x, y);
+                huntMode = false;
+                break;
+            case "Miss":
+                enemyBoard[x][y] = "O";
+                break;
         
     }
 }
