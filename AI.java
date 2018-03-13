@@ -242,4 +242,20 @@ public class AI {
             }
         }
     }
+
+    private boolean hasUncheckedAdjacent(int x, int y) {
+        if (x - 1 >= 0 && enemyBoard[x-1][y].equals(" ")){
+            return true;
+        }
+        if (x + 1 < OCEAN_SIZE && enemyBoard[x+1][y].equals(" ")) {
+            return true;
+        }
+        if (y - 1 >= 0 && enemyBoard[x][y-1].equals(" ")) {
+            return true;
+        }
+        if (y + 1 < OCEAN_SIZE && enemyBoard[x-1][y].equals(" ")) {
+            return true;
+        }
+        return false;
+    }
 }
