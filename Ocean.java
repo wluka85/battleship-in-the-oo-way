@@ -34,14 +34,14 @@ public class Ocean {
     public String takeShot(int x, int y) {
       if (ocean[x][y].equals("S")) {
         ocean[x][y] = "X";
-        int hitedShip = -1;
+        int hitShip = -1;
         for (int i = 0; i < ships.size(); i++) {
           if (ships.get(i).checkIfShip(x, y)) {
-            ships.get(i).decrementHealthPressure();
-            hitedShip = i;
+            ships.get(i).decrementHealthPoints();
+            hitShip = i;
           }
         }
-        if (ships.get(hitedShip).getHealthPressure() < 1) {
+        if (ships.get(hitShip).getHealthPoints() < 1) {
           return "Hit and sunk";
         } else {
           return "Hit";

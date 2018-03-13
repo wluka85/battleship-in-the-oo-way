@@ -8,7 +8,7 @@ public class Ship {
     private int y;
     private int shipLength;
     private boolean vertical;
-    private int healthPressure;
+    private int healthPoints;
 
 
     public Ship(int x, int y, int shipLength) {
@@ -16,7 +16,7 @@ public class Ship {
         this.y = y;
         this.shipLength = shipLength;
         vertical = false;
-        healthPressure = shipLength;
+        healthPoints = shipLength;
         makeShip();
     }
 
@@ -59,13 +59,13 @@ public class Ship {
     }
 
 
-    public void decrementHealthPressure() {
-      healthPressure -= 1;
+    public void decrementHealthPoints() {
+      healthPoints -= 1;
     }
 
 
-    public int getHealthPressure() {
-      return healthPressure;
+    public int getHealthPoints() {
+      return healthPoints;
     }
 
 
