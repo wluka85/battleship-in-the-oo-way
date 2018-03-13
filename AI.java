@@ -158,6 +158,18 @@ public class AI {
         }
     }
 
+    private void attackDamagedShip(Ocean enemyOcean) {
+
+        for (int x = 0; x < OCEAN_SIZE; x++) {
+            for (int y = 0; y < OCEAN_SIZE; y++) {
+                if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)){
+                    attackAdjacent(x, y);
+                }
+            }
+        }
+
+    }
+
     private void handleHit(int x, int y) {
 
         enemyBoard[x][y] = "X";
