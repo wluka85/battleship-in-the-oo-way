@@ -205,4 +205,15 @@ public class AI {
             }
         }
     }
+
+    private void markRight(int x, int y) {
+        for (int i = x; i < OCEAN_SIZE; i++) {
+            if (enemyBoard[i][y].equals("X")){
+                continue;
+            } else {
+                enemyBoard[i][y] = "O";
+                break;
+            }
+        }
+    }
 }
