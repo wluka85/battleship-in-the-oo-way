@@ -185,7 +185,7 @@ public class AI {
     }
 
     private void markDown(int x, int y) {
-        for (int i = y; i < OCEAN_SIZE; i--) {
+        for (int i = y; i < OCEAN_SIZE; i++) {
             if (enemyBoard[x][i].equals("X")){
                 continue;
             } else {
