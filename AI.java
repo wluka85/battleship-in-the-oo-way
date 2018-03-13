@@ -3,14 +3,23 @@ import java.util.Random;
 public class AI {
 
     private static final int OCEAN_SIZE = 10;
-    private String[][] enemyOcean = new String[10][10];
+    private String[][] enemyBoard = new String[10][10];
     public Ocean ocean;
     private int level;
 
     public AI (Ocean ocean, int level) {
         this.ocean = ocean;
         this.level = level;
+        fillEnemyBoard();
         addShipsToOcean();
+    }
+
+    private void fillEnemyBoard() {
+        for (int x = 0; x < OCEAN_SIZE; x++) {
+            for (int y = 0; y < OCEAN_SIZE; y++) {
+                enemyBoard[x][y] = " ";
+            }
+        }
     }
 
     private void addShipsToOcean() {
@@ -88,10 +97,9 @@ public class AI {
             int x = generator.nextInt(OCEAN_SIZE);
             int y = generator.nextInt(OCEAN_SIZE);
 
-            isWater = board[x][y].equals(" ");
+            isWater = enemyBoard[x][y].equals(" ");
 
         }while(!isWater);
-
 
     }
 }
