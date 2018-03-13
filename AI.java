@@ -164,4 +164,12 @@ public class AI {
             enemyBoard[x+1][y+1] = "O";
         }
     }
+
+    private void handleHitAndSunk(int x, int y) {
+        handleHit(x, y);
+        markTop(x, y);
+        markDown(x, y);
+        markLeft(x, y);
+        markRight(x, y);
+    }
 }
