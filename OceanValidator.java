@@ -26,7 +26,7 @@ public class OceanValidator {
 
     }
 
-    private static boolean checkVerticalSquare(String[][] ocean, int x, int y, int part) {
+    private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
         /**
          * Function checks if 'ship' oriented vertically 
          * is placed accordingly to game rules
@@ -87,7 +87,7 @@ public class OceanValidator {
         return true;
     }
 
-    private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
+    private static boolean checkVerticalSquare(String[][] ocean, int x, int y, int part) {
         /**
          * Function checks if 'ship' oriented horizontally 
          * is placed accordingly to game rules
