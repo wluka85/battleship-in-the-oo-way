@@ -5,9 +5,11 @@ public class AI {
     private static final int OCEAN_SIZE = 10;
     private String[][] enemyOcean = new String[10][10];
     public Ocean ocean;
+    private int level;
 
-    public AI (Ocean ocean) {
+    public AI (Ocean ocean, int level) {
         this.ocean = ocean;
+        this.level = level;
         addShipsToOcean();
     }
     
@@ -73,6 +75,12 @@ public class AI {
     }
 
     public void takeATurn() {
+        if (level == 1) {
+            easyAIMove();
+        }
+    }
 
+    private void easyAIMove() {
+        
     }
 }
