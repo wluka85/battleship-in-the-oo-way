@@ -163,7 +163,7 @@ public class AI {
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
                 if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)){
-                    attackAdjacent(x, y);
+                    attackAdjacent(x, y, enemyOcean);
                 }
             }
         }
@@ -257,5 +257,11 @@ public class AI {
             return true;
         }
         return false;
+    }
+
+    private void attackAdjacent(int x, int y, Ocean enemyOcean) {
+
+        
+        
     }
 }
