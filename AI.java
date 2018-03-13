@@ -12,7 +12,7 @@ public class AI {
         this.level = level;
         addShipsToOcean();
     }
-    
+
     private void addShipsToOcean() {
         addCarrier();
         addBattleship();
@@ -81,6 +81,17 @@ public class AI {
     }
 
     private void easyAIMove() {
-        
+
+        boolean unknownSquare;
+        do {
+            Random generator = new Random();
+            int x = generator.nextInt(OCEAN_SIZE);
+            int y = generator.nextInt(OCEAN_SIZE);
+
+            unknownSquare = board[x][y].equals(" ");
+
+        }while(!unknownSquare);
+
+
     }
 }
