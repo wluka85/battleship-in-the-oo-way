@@ -86,6 +86,8 @@ public class AI {
     public void takeATurn(Ocean enemyOcean) {
         if (level == 1) {
             easyAIMove(enemyOcean);
+        } else if (level == 2) {
+            mediumAIMove(enemyOcean);
         }
     }
 
@@ -108,6 +110,33 @@ public class AI {
             case "Hit":
             case "Hit and sunk":
                 enemyBoard[x][y] = "X";
+                break;
+            case "Miss":
+                enemyBoard[x][y] = "O";
+                break;
+        }
+    }
+
+    private void mediumAIMove(Ocean enemyOcean) {
+        int x, y;
+        boolean isWater;
+        do {
+            Random generator = new Random();
+            x = generator.nextInt(OCEAN_SIZE);
+            y = generator.nextInt(OCEAN_SIZE);
+
+            isWater = enemyBoard[x][y].equals(" ");
+
+        }while(!isWater);
+
+        String shootResult = enemyOcean.takeShot(x, y);
+
+        switch (shootResult) {
+            case "Hit":
+                handleHit(x, y);
+                break;
+            case "Hit and sunk":
+                handleHitAndSunk(x, y);
                 break;
             case "Miss":
                 enemyBoard[x][y] = "O";
