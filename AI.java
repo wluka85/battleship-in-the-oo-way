@@ -91,7 +91,7 @@ public class AI {
         } else if (level == 2) {
             mediumAIMove(enemyOcean);
         } else if (level == 3) {
-            hardAIMove(enemOcean);
+            hardAIMove(enemyOcean);
         }
     }
 
@@ -289,6 +289,6 @@ public class AI {
             case "Miss":
                 enemyBoard[x][y] = "O";
                 break;
-        
+        }
     }
 }
