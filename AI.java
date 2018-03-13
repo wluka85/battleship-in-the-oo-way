@@ -194,4 +194,15 @@ public class AI {
             }
         }
     }
+
+    private void markLeft(int x, int y) {
+        for (int i = x; i >= 0; i--) {
+            if (enemyBoard[i][y].equals("X")){
+                continue;
+            } else {
+                enemyBoard[i][y] = "O";
+                break;
+            }
+        }
+    }
 }
