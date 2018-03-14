@@ -16,7 +16,7 @@ public class Highscore {
 
         List<String> highscores = new ArrayList<String>();
         highscores = getHighscores();
-        highscores.add(createPlayerScoreLine(playersName, points));
+        highscores.add(0, createPlayerScoreLine(playersName, points));
         saveTop10Scores(highscores);
 
     }
@@ -74,5 +74,28 @@ public class Highscore {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    private List<String> sortHighscores(List<String> highscores) {
+        boolean notDone = true;
+
+        while (notDone){
+            notDone = false;
+
+            for(int i = 0; i < highscores.size()-1; i++){
+
+                int pointsAtI = Integer.parseInt(highscores.get(i).split(",")[2]);
+                int pointsAtNext = Integer.parseInt(highscores.get(i+1).split(",")[2]);
+
+                if(pointsAtNext > pointsAtI){
+                    notDone = true;
+                    String temp = highscores.get(i);
+                    highscores.set(i, highscores.get(i+1));
+                    highscores.set(i+1, temp);
+                }
+            }
+        }
+
+        return highscores;
     }
 }
