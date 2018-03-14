@@ -109,4 +109,11 @@ public class Highscore {
 
         return displayable;
     }
+
+    private String getDisplayableLine(String highscoreLine) {
+
+        String[] highscoreParts = highscoreLine.split(",");
+        return String.join(" | ", highscoreParts);
+
+    }
 }
