@@ -221,21 +221,21 @@ public class AI {
         }
     }
 
-    private void masterAIMove(Ocean enemyOcean) {
-        /**
-         * AI behaves on 2 different ways
-         * 
-         * Normal: randomly shoots untill hits something
-         * Hunt: attacks damaged ship untill destroyed
-         * 
-         */
+    // private void masterAIMove(Ocean enemyOcean) {
+    //     /**
+    //      * AI behaves on 2 different ways
+    //      * 
+    //      * Normal: randomly shoots untill hits something
+    //      * Hunt: attacks damaged ship untill destroyed
+    //      * 
+    //      */
 
-        if (huntMode) {
-            attackDamagedShip(enemyOcean);
-        } else {
-            bestMove(enemyOcean);
-        }
-    }
+    //     if (huntMode) {
+    //         attackDamagedShip(enemyOcean);
+    //     } else {
+    //         bestMove(enemyOcean);
+    //     }
+    // }
 
     private void attackDamagedShip(Ocean enemyOcean) {
         /**
@@ -243,15 +243,14 @@ public class AI {
          * and attacks squares adjacent to it
          * 
          */
-
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
                 if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)) {
                     attackAdjacent(x, y, enemyOcean);
+                    return;
                 }
             }
         }
-
     }
 
     private void handleHit(int x, int y) {
