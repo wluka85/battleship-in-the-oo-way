@@ -432,7 +432,12 @@ public class AI {
     }
 
     private void bestMove(Ocean enemyOcean) {
-        
+        /**
+         * Method used by AI on level 4 or higher
+         * 
+         * AI looks for best move. 
+         * If not found, picks random square;
+         */
         boolean foundBestMove = makeBestMove(enemyOcean);
 
         if (!foundBestMove) {
