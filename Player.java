@@ -6,6 +6,6 @@ public class Player {
     public Ocean ocean;
 
     public Player(Ocean ocean) {
-        this.ocean = Ocean;
+        this.ocean = ocean;
     }
 }
