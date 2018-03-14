@@ -19,7 +19,7 @@ public class HandleGame {
         pvp(ocea1, ocean2);
     }
 
-    public void pvp(Ocean ocean1, Ocean ocean2) {
+    private void pvp(Ocean ocean1, Ocean ocean2) {
         oceans.add(ocean1);
         players.add(new Player(oceans.get(0)));
 
@@ -28,7 +28,7 @@ public class HandleGame {
 
     }
 
-    public void pvAI(Ocean ocean) {
+    private void pvAI(Ocean ocean) {
         oceans.add(ocean);
         players.add(new Player(oceans.get(0)));
 
@@ -37,7 +37,7 @@ public class HandleGame {
 
     }
 
-    public void aivAI() {
+    private void aivAI() {
         oceans.add(new Ocean());
         players.add(new AI(oceans.get(0)));
 
