@@ -65,4 +65,14 @@ public class HandleGame {
 
         return true;
     }
+
+    public void takeATurn(int playerIndex, int x, int y) {
+        int nextPlayerIndex = (playerIndex + 1) % 2;
+        oceans.get(nextPlayerIndex).takeShot(x, y);
+    }
+
+    public void takeATurn(int playerIndex) {
+        
+        players.get(playerIndex).takeAShoot();
+    }
 }
