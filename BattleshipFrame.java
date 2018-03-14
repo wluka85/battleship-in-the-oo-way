@@ -11,15 +11,17 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JMenuItem menuItemNewGame, menuItemExit;
     private JLabel[][] squaresLabelMy = new JLabel[10][10];
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
-    private JPanel oceanPanel;
+    private JPanel oceanPanel, hudPanel;
     private String gameMode = "";
 
     public BattleshipFrame() {
         addMenuBar();
-        setLayout(new GridLayout(1, 2, 20, 10));
-        addOceanPanel(squaresLabelMy);
-        addOceanPanel(squaresLabelEnemy);
-
+        setLayout(new BorderLayout());
+        hudPanel = new JPanel();
+        hudPanel.setLayout(new GridLayout(1, 2, 20, 10));
+        hudPanel.add(addOceanPanel(squaresLabelMy));
+        hudPanel.add(addOceanPanel(squaresLabelEnemy));
+        add(hudPanel);
         setSize(getPrefferedSize());
     }
 
@@ -44,7 +46,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     }
 
 
-    private void addOceanPanel(JLabel[][] squaresLabel) {
+    private JPanel addOceanPanel(JLabel[][] squaresLabel) {
         oceanPanel = new JPanel();
         oceanPanel.setLayout(new GridLayout(10, 10));
         for (int i = 0; i < squaresLabel.length; i++) {
@@ -54,7 +56,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
                 oceanPanel.add(squaresLabel[i][j]);
             }
         }
-        add(oceanPanel);
+        return oceanPanel;
 
     }
 
