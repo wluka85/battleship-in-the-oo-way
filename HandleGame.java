@@ -72,7 +72,7 @@ public class HandleGame {
     }
 
     public void takeATurn(int playerIndex) {
-        
-        players.get(playerIndex).takeAShoot();
+        int nextPlayerIndex = (playerIndex + 1) % 2;
+        players.get(playerIndex).takeAShoot(oceans.get(nextPlayerIndex));
     }
 }
