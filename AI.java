@@ -471,6 +471,27 @@ public class AI {
         return false;
     }
 
+    private int countUncheckedAdjacent(int x, int y) {
+        /**
+         * Methot returns number of unchecked squares
+         * adjacent to square at X, Y coordinates
+         */
+        int uncheckedAdjacent = 0;
+        if (uncheckedLeft(x, y)) {
+            uncheckedAdjacent++;
+        }
+        if (uncheckedRight(x, y)) {
+            uncheckedAdjacent++;
+        }
+        if (uncheckedBottom(x, y)) {
+            uncheckedAdjacent++;
+        }
+        if (uncheckedTop(x, y)) {
+            uncheckedAdjacent++;
+        }
+
+        return uncheckedAdjacent;
+    }
     public String[][] getEnemyBoard() {
         /**
          * Accessor method for variable enemyBoard
