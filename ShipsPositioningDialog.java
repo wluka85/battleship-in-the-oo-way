@@ -81,4 +81,46 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
     public Dimension getPrefferedSize() {
       return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
+
+
+    public void mouseClicked(MouseEvent e) {
+        Object source = e.getSource();
+        int[] position =  getXY(source);
+        lengthShip = getLengthShip(nameShip);
+        ship = new Ship(position[0], position[1], lengthShip, vertical);
+        ocean.addShip(ship);
+        displayOcean(ocean);
+        if (OceanValidator.validateOcean(ocean.getOceanBoard(), ship)) {
+            counterShip += 1;
+            if (counterShip == 5) {
+                dispose();
+            } else {
+                nameShip = getNameShip(counterShip);
+                nameShipLabel.setText(nameShip);
+            }
+        }
+    }
+
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+
+     @Override
+     public void mouseReleased(MouseEvent e) {
+    }
 }
