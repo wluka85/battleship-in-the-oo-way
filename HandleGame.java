@@ -7,6 +7,7 @@ public class HandleGame {
     private List<Object> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
+
     public void pvp() {
         oceans.add(new Ocean());
         players.add(new Player(oceans.get(0)));
@@ -16,6 +17,7 @@ public class HandleGame {
 
         playTheGame();
     }
+
 
     public void pvAI() {
         oceans.add(new Ocean());
@@ -27,6 +29,7 @@ public class HandleGame {
         playTheGame();
     }
 
+
     public void aivAI() {
         oceans.add(new Ocean());
         players.add(new AI(oceans.get(0)));
@@ -36,6 +39,7 @@ public class HandleGame {
 
         playTheGame();
     }
+
 
     public void playTheGame() {
 
@@ -50,6 +54,7 @@ public class HandleGame {
 
         }while(!endOfGame);
     }
+
 
     private boolean checkIfGameOver(Ocean ocean) {
         String[][] board = ocean.getOceanBoard();
