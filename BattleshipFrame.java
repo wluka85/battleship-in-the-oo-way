@@ -90,7 +90,6 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     public void actionPerformed(ActionEvent e) {
         ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
         gameMode = chooseGameMode.getGameMode();
-        System.out.println(gameMode);
     }
 
 
