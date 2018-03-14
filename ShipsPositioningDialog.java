@@ -13,7 +13,11 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
     private JRadioButton verticalButton, horizontalButton;
     private Ship ship;
     private int lengthShip = 5;
-
+    private Ocean ocean = new Ocean();
+    private boolean vertical = true;
+    private final static String[] namesShips = {"Carrier 5", "Battleship 4", "Cruiser 3", "Submarine 3", "Destroyer 2"};
+    private int counterShip = 0;
+    private String nameShip = "Carrier 5";
 
 
     public ShipsPositioningDialog(JFrame owner) {
@@ -122,5 +126,48 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
 
      @Override
      public void mouseReleased(MouseEvent e) {
+    }
+
+
+    private void displayOcean(Ocean ocean) {
+        String[][] oceanBoard = new String[10][10];
+        oceanBoard = ocean.getOceanBoard();
+        for (int i = 0; i < squaresLabelMy.length; i++) {
+            for (int j = 0; j < squaresLabelMy[i].length; j++) {
+                squaresLabelMy[i][j].setText(oceanBoard[i][j]);
+            }
+        }
+    }
+
+
+    private int[] getXY(Object source) {
+        for (int i = 0; i < squaresLabelMy.length; i++) {
+            for (int j = 0; j < squaresLabelMy[i].length; j++) {
+                if(source == squaresLabelMy[i][j]) {
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return new int[] {0, 0};
+    }
+
+
+    private int getLengthShip(String nameShip) {
+        if (nameShip.equals("Carrier 5")) {return 5;};
+        if (nameShip.equals("Battleship 4")) {return 4;};
+        if (nameShip.equals("Cruiser 3")) {return 3;};
+        if (nameShip.equals("Submarine 3")) {return 3;};
+        if (nameShip.equals("Destroyer 2")) {return 2;};
+        return 0;
+    }
+
+
+    private String getNameShip(int counterShip) {
+        return namesShips[counterShip];
+    }
+
+
+    public Ocean getOcean() {
+        return ocean;
     }
 }
