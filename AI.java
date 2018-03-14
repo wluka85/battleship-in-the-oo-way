@@ -431,6 +431,15 @@ public class AI {
         }
     }
 
+    private void bestMove(Ocean enemyOcean) {
+        
+        boolean foundBestMove = makeBestMove(enemyOcean);
+
+        if (!foundBestMove) {
+            mediumAIMove(enemyOcean);
+        }
+    }
+
     public String[][] getEnemyBoard() {
         /**
          * Accessor method for variable enemyBoard
