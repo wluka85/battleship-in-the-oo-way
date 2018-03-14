@@ -6,7 +6,13 @@ import java.awt.event.*;
 public class ShipsPositioningDialog extends JDialog implements MouseListener {
     private static final int DEFAULT_WIDTH = 500;
     private static final int DEFAULT_HEIGHT = 550;
-
+    private JLabel[][] squaresLabelMy = new JLabel[10][10];
+    private JLabel nameShipLabel;
+    private JPanel oceanPanel, optionsOfShipPanel;
+    private ButtonGroup radioButtonGroup;
+    private JRadioButton verticalButton, horizontalButton;
+    private Ship ship;
+    private int lengthShip = 5;
 
 
 
@@ -14,6 +20,7 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
         super(owner, "Add ships", true);
         setLayout(new BorderLayout());
         addOceanPanel(squaresLabelMy);
+        addOptionsOfShips();
         setSize(getPrefferedSize());
         setResizable(false);
         setVisible(true);
@@ -42,6 +49,32 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
         squareLabel.setVerticalAlignment(JLabel.CENTER);
 
         return squareLabel;
+    }
+
+
+    private void addOptionsOfShips() {
+        radioButtonGroup = new ButtonGroup();
+        optionsOfShipPanel = new JPanel();
+        nameShipLabel = new JLabel(namesShips[0]);
+        verticalButton = new JRadioButton("Vertical", false);
+        horizontalButton = new JRadioButton("Horizontal", true);
+        verticalButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              vertical = false;
+            }
+        });
+        horizontalButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              vertical = true;
+            }
+        });
+        optionsOfShipPanel.add(nameShipLabel);
+        radioButtonGroup.add(verticalButton);
+        radioButtonGroup.add(horizontalButton);
+        optionsOfShipPanel.add(verticalButton);
+        optionsOfShipPanel.add(horizontalButton);
+
+        add(optionsOfShipPanel, BorderLayout.SOUTH);
     }
 
 
