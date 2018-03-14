@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class Highscore {
 
         List<String> highscores = new ArrayList<String>();
         highscores = getHighscores();
-        highscores = addCurrentScore(playersName, points);
-        saveTop10Scores(highscores);
+        highscores.add(createPlayerScoreLine(playersName, points));
+        // saveTop10Scores(highscores);
 
     }
 
@@ -43,5 +44,14 @@ public class Highscore {
         }
 
         return highscores;
+    }
+
+    private String createPlayerScoreLine(String name, int points) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        String date = dtf.format(now);
+        String playerScoreLine = String.join(",", name, date, points + "");
+
+        return playerScoreLine;
     }
 }
