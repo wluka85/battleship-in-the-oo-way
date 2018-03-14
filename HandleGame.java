@@ -80,7 +80,7 @@ public class HandleGame {
         if (boardNumber == 0) {
             return oceans.get(playerIndex).getOceanBoard();
         } else {
-            return players.get(playerIndex)).getEnemyBoard();
+            return players.get(playerIndex).getEnemyBoard();
         }
     }
 }
