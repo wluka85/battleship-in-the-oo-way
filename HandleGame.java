@@ -7,6 +7,16 @@ public class HandleGame {
     private List<Object> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
+    public HandleGame (String gamemode) {
+        if (gamemode.equals("pvp")) {
+            pvp();
+        } else if (gamemode.equals("pvAI")) {
+            pvAI();
+        } else {
+            aivAI();
+        }
+    }
+
     public void pvp() {
         oceans.add(new Ocean());
         players.add(new Player(oceans.get(0)));
