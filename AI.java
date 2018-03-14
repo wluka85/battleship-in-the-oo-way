@@ -206,6 +206,13 @@ public class AI {
     }
 
     private void hardAIMove(Ocean enemyOcean) {
+        /**
+         * AI behaves on 2 different ways
+         * 
+         * Normal: randomly shoots untill hits something
+         * Hunt: attacks damaged ship untill destroyed
+         * 
+         */
 
         if (huntMode) {
             attackDamagedShip(enemyOcean);
@@ -215,6 +222,11 @@ public class AI {
     }
 
     private void attackDamagedShip(Ocean enemyOcean) {
+        /**
+         * Searches for damaged ship part
+         * and attacks squares adjacent to it
+         * 
+         */
 
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
@@ -227,6 +239,12 @@ public class AI {
     }
 
     private void handleHit(int x, int y) {
+        /**
+         * Method marks enemyBoard on hit.
+         * 
+         *  'X' - place where ship was
+         *  'O' - squares placed diagonally to where ship was
+         */
 
         enemyBoard[x][y] = "X";
 
@@ -248,6 +266,10 @@ public class AI {
     }
 
     private void handleHitAndSunk(int x, int y) {
+        /**
+         * Method marks all squares around destroyed ship
+         * 
+         */
         handleHit(x, y);
         markTop(x, y);
         markDown(x, y);
@@ -256,6 +278,9 @@ public class AI {
     }
 
     private void markTop(int x, int y) {
+        /**
+         * Method marks unmarked square above shot square;
+         */
         for (int i = y; i >= 0; i--) {
             if (enemyBoard[x][i].equals("X")) {
                 continue;
@@ -267,6 +292,9 @@ public class AI {
     }
 
     private void markDown(int x, int y) {
+        /**
+         * Method marks unmarked square under shot square;
+         */
         for (int i = y; i < OCEAN_SIZE; i++) {
             if (enemyBoard[x][i].equals("X")) {
                 continue;
@@ -278,6 +306,9 @@ public class AI {
     }
 
     private void markLeft(int x, int y) {
+        /**
+         * Method marks unmarked square on left of shot square;
+         */
         for (int i = x; i >= 0; i--) {
             if (enemyBoard[i][y].equals("X")) {
                 continue;
@@ -289,6 +320,9 @@ public class AI {
     }
 
     private void markRight(int x, int y) {
+        /**
+         * Method marks unmarked square on right of shot square;
+         */
         for (int i = x; i < OCEAN_SIZE; i++) {
             if (enemyBoard[i][y].equals("X")) {
                 continue;
@@ -300,26 +334,62 @@ public class AI {
     }
 
     private boolean hasUncheckedAdjacent(int x, int y) {
+        /**
+         * Method checks if there are
+         * unmarked squares adjacent to
+         * square on x, y coordinates
+         * 
+         */
         return (uncheckedLeft(x, y) || uncheckedRight(x, y) || uncheckedTop(x, y) || uncheckedBottom(x, y));
     }
 
     private boolean uncheckedLeft(int x, int y) {
+        /**
+         * Method checks if there is
+         * unmarked square on left of
+         * square on x, y coordinates
+         * 
+         */
         return (x - 1 >= 0 && enemyBoard[x - 1][y].equals(" "));
     }
 
     private boolean uncheckedRight(int x, int y) {
+        /**
+         * Method checks if there is
+         * unmarked square on right of
+         * square on x, y coordinates
+         * 
+         */
         return (x + 1 < OCEAN_SIZE && enemyBoard[x + 1][y].equals(" "));
     }
 
     private boolean uncheckedTop(int x, int y) {
+        /**
+         * Method checks if there is
+         * unmarked square above
+         * square on x, y coordinates
+         * 
+         */
         return (y - 1 >= 0 && enemyBoard[x][y - 1].equals(" "));
     }
 
     private boolean uncheckedBottom(int x, int y) {
+        /**
+         * Method checks if there is
+         * unmarked square below
+         * square on x, y coordinates
+         * 
+         */
         return (y + 1 < OCEAN_SIZE && enemyBoard[x - 1][y].equals(" "));
     }
 
     private void attackAdjacent(int x, int y, Ocean enemyOcean) {
+        /**
+         * Method used by AI to take a shot
+         * at unmarked square adjacent to 
+         * undestroyed ship
+         * 
+         */
 
         String shootResult;
         if (uncheckedLeft(x, y)) {
@@ -347,6 +417,9 @@ public class AI {
     }
 
     public String[][] getEnemyBoard() {
+        /**
+         * Accessor method for variable enemyBoard
+         */
         return enemyBoard;
     }
 }
