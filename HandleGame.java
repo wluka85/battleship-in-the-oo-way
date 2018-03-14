@@ -16,7 +16,7 @@ public class HandleGame {
     }
 
     public HandleGame (Ocean ocean1, Ocean ocean2) {
-        pvp(ocea1, ocean2);
+        pvp(ocean1, ocean2);
     }
 
     private void pvp(Ocean ocean1, Ocean ocean2) {
