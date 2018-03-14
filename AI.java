@@ -85,7 +85,7 @@ public class AI {
         ocean.addShip(destroyer);
     }
 
-    public void takeATurn(Ocean enemyOcean) {
+    public void takeAShoot(Ocean enemyOcean) {
         if (level == 1) {
             easyAIMove(enemyOcean);
         } else if (level == 2) {
