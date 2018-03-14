@@ -445,6 +445,32 @@ public class AI {
         }
     }
 
+    private boolean makeBestMove(Ocean enemyOcean) {
+        /**
+         * Method used by AI on level 4 or higher
+         * Best move is move which checks more than one square
+         * Example:
+         *    X     Since '1' has only 1 unchecked
+         *  X 1 2   adjacent square ('2') its better to 
+         *    X     check square '2', because if its empty,
+         * '1' is also empty (there are no ships of length 1)
+         */
+
+        int uncheckedAdjacent;
+
+        for (int x = 0; x < OCEAN_SIZE; x++) {
+            for (int y = 0; y < OCEAN_SIZE; y++) {
+                uncheckedAdjacent = countUncheckedAdjacent(x, y);
+                if (uncheckedAdjacent == 1) {
+                    attackAdjacent(x, y, enemyOcean);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public String[][] getEnemyBoard() {
         /**
          * Accessor method for variable enemyBoard
