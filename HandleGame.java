@@ -46,7 +46,14 @@ public class HandleGame {
 
     }
 
-    private boolean checkIfGameOver(Ocean ocean) {
+    public boolean checkIfGameOver() {
+        Ocean ocean1 = oceans.get(0);
+        Ocean ocean2 = oceans.get(1);
+
+        return (checkOcean(ocean1) && checkOcean(ocean2));
+    }
+
+    private boolean checkOcean(Ocean ocean) {
         String[][] board = ocean.getOceanBoard();
         for (String[] row : board) {
             for (String square : row) {
