@@ -8,7 +8,7 @@ public class Main {
           {
             public void run() {
               BattleshipFrame battleshipFrame = new BattleshipFrame();
-              battleshipFrame.setTitle("Todo");
+              battleshipFrame.setTitle("Battleship");
               battleshipFrame.setLocationRelativeTo(null);
               battleshipFrame.setResizable(false);
               battleshipFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
