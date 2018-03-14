@@ -100,19 +100,21 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
 
 
     private void simulationAIvAI() {
-        while (checkIfGameOver() == false) {
-            takeATurn(0);
-            takeATurn(1);
+        while (!handleGame.checkIfGameOver()) {
+            handleGame.takeATurn(0);
+            String[][] oceanAI1 = handleGame.getOceanBoard(0, 1);
+            displayOcean(oceanAI1, squaresLabelMy);
+            handleGame.takeATurn(1);
+            String[][] oceanAI2 = handleGame.getOceanBoard(1, 1);
+            displayOcean(oceanAI1, squaresLabelEnemy);
         }
     }
 
 
-    private void displayOcean(Ocean ocean) {
-        String[][] oceanBoard = new String[10][10];
-        oceanBoard = ocean.getOceanBoard();
-        for (int i = 0; i < squaresLabelMy.length; i++) {
-            for (int j = 0; j < squaresLabelMy[i].length; j++) {
-                squaresLabelMy[i][j].setText(oceanBoard[i][j]);
+    private void displayOcean(String[][] oceanBoard, JLabel[][] squaresLabel) {
+        for (int i = 0; i < squaresLabel.length; i++) {
+            for (int j = 0; j < squaresLabel[i].length; j++) {
+                squaresLabel[i][j].setText(oceanBoard[i][j]);
             }
         }
     }
