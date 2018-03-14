@@ -13,6 +13,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
     private JPanel oceanPanel, hudPanel;
     private String gameMode = "";
+    private HandleGame handleGame;
 
     public BattleshipFrame() {
         addMenuBar();
@@ -92,6 +93,28 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     public void actionPerformed(ActionEvent e) {
         ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
         gameMode = chooseGameMode.getGameMode();
+        if (gameMode.equals("aivAI")) {
+            handleGame = new HandleGame (1, 2);
+        }
+    }
+
+
+    private void simulationAIvAI() {
+        while (checkIfGameOver() == false) {
+            takeATurn(0);
+            takeATurn(1);
+        }
+    }
+
+
+    private void displayOcean(Ocean ocean) {
+        String[][] oceanBoard = new String[10][10];
+        oceanBoard = ocean.getOceanBoard();
+        for (int i = 0; i < squaresLabelMy.length; i++) {
+            for (int j = 0; j < squaresLabelMy[i].length; j++) {
+                squaresLabelMy[i][j].setText(oceanBoard[i][j]);
+            }
+        }
     }
 
 
