@@ -221,6 +221,22 @@ public class AI {
         }
     }
 
+    private void masterAIMove(Ocean enemyOcean) {
+        /**
+         * AI behaves on 2 different ways
+         * 
+         * Normal: randomly shoots untill hits something
+         * Hunt: attacks damaged ship untill destroyed
+         * 
+         */
+
+        if (huntMode) {
+            attackDamagedShip(enemyOcean);
+        } else {
+            bestMove(enemyOcean);
+        }
+    }
+
     private void attackDamagedShip(Ocean enemyOcean) {
         /**
          * Searches for damaged ship part
