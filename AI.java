@@ -10,6 +10,13 @@ public class AI {
     // huntMode is used only by AI on level 3
 
     public AI(Ocean ocean, int level) {
+        /**
+         * AI constructor
+         * Saves its ocean and level
+         * 
+         * Ocean stores ships
+         * level determines how AI plays
+         */
         this.ocean = ocean;
         this.level = level;
         fillEnemyBoard();
@@ -17,6 +24,11 @@ public class AI {
     }
 
     private void fillEnemyBoard() {
+        /**
+         * Fills String[][] enemyBoard
+         * On start enemyBoard is filled
+         * with empty fields (whitespaces)
+         */
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
                 enemyBoard[x][y] = " ";
@@ -25,6 +37,10 @@ public class AI {
     }
 
     private void addShipsToOcean() {
+        /**
+         * Method used by AI to randomly
+         * place ships on Ocean board
+         */
         addCarrier();
         addBattleship();
         addCruiser();
@@ -34,6 +50,10 @@ public class AI {
     }
 
     private void addCarrier() {
+        /**
+         * Method used to place a ship
+         * of length 5.
+         */
         Ship carrier;
         boolean validShipLocation;
         do {
@@ -47,6 +67,10 @@ public class AI {
     }
 
     private void addBattleship() {
+        /**
+         * Method used to place a ship
+         * of length 4.
+         */
         Ship battleship;
         boolean validShipLocation;
         do {
@@ -60,6 +84,10 @@ public class AI {
     }
 
     private void addCruiser() {
+        /**
+         * Method used to place a ship
+         * of length 3.
+         */
         Ship cruiser;
         boolean validShipLocation;
         do {
@@ -73,6 +101,11 @@ public class AI {
     }
 
     private void addDestroyer() {
+        /**
+         * Method used to place a ship
+         * of length 2.
+         * 
+         */
         Ship destroyer;
         boolean validShipLocation;
         do {
@@ -86,6 +119,13 @@ public class AI {
     }
 
     public void takeAShoot(Ocean enemyOcean) {
+        /**
+         * Method used by AI to take a shot
+         * 
+         * AI with higher level uses more
+         * advanced algorithms
+         * 
+         */
         if (level == 1) {
             easyAIMove(enemyOcean);
         } else if (level == 2) {
@@ -96,7 +136,13 @@ public class AI {
     }
 
     private void easyAIMove(Ocean enemyOcean) {
-
+        /**
+         * Easy Move:
+         * AI randomly picks square to shoot
+         *  and marks it accordingly to result
+         *  (miss / hit / hit and sunk)
+         * 
+         */
         int x, y;
         boolean isWater;
         do {
@@ -122,6 +168,16 @@ public class AI {
     }
 
     private void mediumAIMove(Ocean enemyOcean) {
+        /**
+         * Medium Move:
+         * AI randomly picks square to shoot
+         *  and marks it accordingly to result
+         *  (miss / hit / hit and sunk)
+         * 
+         * On hit, AI marks as many squares as it can
+         * (squares placed diagonally)
+         * 
+         */
         int x, y;
         boolean isWater;
         do {
