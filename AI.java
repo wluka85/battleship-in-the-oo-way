@@ -345,4 +345,8 @@ public class AI {
             break;
         }
     }
+
+    public String[][] getEnemyBoard() {
+        return enemyBoard;
+    }
 }
