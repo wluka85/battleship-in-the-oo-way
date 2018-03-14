@@ -98,4 +98,15 @@ public class Highscore {
 
         return highscores;
     }
+
+    public List<String> getDisplayableHighscoreList () {
+        List<String> highscores = getHighscores();
+        List<String> displayable = new ArrayList<String>();
+
+        for(String highscoreLine : highscores) {
+            displayable.add(getDisplayableLine(highscoreLine));
+        }
+
+        return displayable;
+    }
 }
