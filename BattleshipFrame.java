@@ -12,6 +12,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JLabel[][] squaresLabelMy = new JLabel[10][10];
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
     private JPanel oceanPanel;
+    private String gameMode = "";
 
     public BattleshipFrame() {
         addMenuBar();
@@ -87,7 +88,9 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
 
 
     public void actionPerformed(ActionEvent e) {
-
+        ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
+        gameMode = chooseGameMode.getGameMode();
+        System.out.println(gameMode);
     }
 
 
