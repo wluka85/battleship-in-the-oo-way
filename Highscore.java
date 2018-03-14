@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Highscore {
 
-    public void manageHighscore(String playersName, int points) {
+    public void addNewScore(String playersName, int points) {
 
         List<String> highscores = new ArrayList<String>();
         highscores = getHighscores();
