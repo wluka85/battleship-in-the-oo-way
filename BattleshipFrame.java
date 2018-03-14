@@ -3,19 +3,43 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class BattleshipFrame extends JFrame implements MouseListener {
+public class BattleshipFrame extends JFrame implements MouseListener, ActionListener {
     private static final int DEFAULT_WIDTH = 1020;
     private static final int DEFAULT_HEIGHT = 500;
+    private JMenuBar menuBar;
+    private JMenu menuGame;
+    private JMenuItem menuItemNewGame, menuItemExit;
     private JLabel[][] squaresLabelMy = new JLabel[10][10];
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
     private JPanel oceanPanel;
 
     public BattleshipFrame() {
+        addMenuBar();
         setLayout(new GridLayout(1, 2, 20, 10));
         addOceanPanel(squaresLabelMy);
         addOceanPanel(squaresLabelEnemy);
 
         setSize(getPrefferedSize());
+    }
+
+
+    private void addMenuBar() {
+      menuBar = new JMenuBar();
+      setJMenuBar(menuBar);
+      menuGame = new JMenu("Game");
+      menuItemNewGame = new JMenuItem("New Game");
+      menuItemExit = new JMenuItem("Exit");
+      menuGame.add(menuItemNewGame);
+      menuGame.add(menuItemExit);
+      menuBar.add(menuGame);
+
+      menuItemNewGame.addActionListener(this);
+
+      menuItemExit.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          dispose();
+        }
+      });
     }
 
 
@@ -59,6 +83,11 @@ public class BattleshipFrame extends JFrame implements MouseListener {
                 }
             }
         }
+    }
+
+
+    public void actionPerformed(ActionEvent e) {
+
     }
 
 
