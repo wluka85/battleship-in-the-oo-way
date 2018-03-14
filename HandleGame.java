@@ -75,4 +75,12 @@ public class HandleGame {
         int nextPlayerIndex = (playerIndex + 1) % 2;
         players.get(playerIndex).takeAShoot(oceans.get(nextPlayerIndex));
     }
+
+    public String[][] getOceanBoard(int playerIndex, int boardNumber) {
+        if (boardNumber == 0) {
+            return oceans.get(playerIndex).getOceanBoard();
+        } else {
+            return players.get(playerIndex)).getEnemyBoard();
+        }
+    }
 }
