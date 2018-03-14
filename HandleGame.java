@@ -7,12 +7,12 @@ public class HandleGame {
     private List<Object> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
-    public HandleGame () {
-        aivAI();
+    public HandleGame (int level1, int level2) {
+        aivAI(level1, level2);
     }
 
-    public HandleGame (Ocean ocean) {
-        pvAI(ocean);
+    public HandleGame (Ocean ocean, int level) {
+        pvAI(ocean, level);
     }
 
     public HandleGame (Ocean ocean1, Ocean ocean2) {
@@ -28,21 +28,21 @@ public class HandleGame {
 
     }
 
-    private void pvAI(Ocean ocean) {
+    private void pvAI(Ocean ocean, int level) {
         oceans.add(ocean);
         players.add(new Player(oceans.get(0)));
 
         oceans.add(new Ocean());
-        players.add(new AI(oceans.get(1)));
+        players.add(new AI(oceans.get(1), level));
 
     }
 
-    private void aivAI() {
+    private void aivAI(int level1, int level2) {
         oceans.add(new Ocean());
-        players.add(new AI(oceans.get(0)));
+        players.add(new AI(oceans.get(0), level1));
 
         oceans.add(new Ocean());
-        players.add(new AI(oceans.get(1)));
+        players.add(new AI(oceans.get(1), level2));
 
     }
 
