@@ -187,7 +187,7 @@ public class AI {
             x = generator.nextInt(OCEAN_SIZE);
             y = generator.nextInt(OCEAN_SIZE);
 
-            isWater = enemyBoard[x][y].equals(" ");
+            isWater = enemyBoard[x][y].equals(" ") && countUncheckedAdjacent(x, y) != 0;
 
         } while (!isWater);
 
@@ -422,6 +422,7 @@ public class AI {
         switch (shootResult) {
         case "Hit":
             handleHit(x, y);
+            huntMode = true;
             break;
         case "Hit and sunk":
             handleHitAndSunk(x, y);
