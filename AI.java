@@ -132,6 +132,8 @@ public class AI {
             mediumAIMove(enemyOcean);
         } else if (level == 3) {
             hardAIMove(enemyOcean);
+        } else if (level == 4) {
+            masterAIMove(enemyOcean);
         }
     }
 
@@ -221,21 +223,21 @@ public class AI {
         }
     }
 
-    // private void masterAIMove(Ocean enemyOcean) {
-    //     /**
-    //      * AI behaves on 2 different ways
-    //      * 
-    //      * Normal: randomly shoots untill hits something
-    //      * Hunt: attacks damaged ship untill destroyed
-    //      * 
-    //      */
+    private void masterAIMove(Ocean enemyOcean) {
+        /**
+         * AI behaves on 2 different ways
+         * 
+         * Normal: randomly shoots untill hits something
+         * Hunt: attacks damaged ship untill destroyed
+         * 
+         */
 
-    //     if (huntMode) {
-    //         attackDamagedShip(enemyOcean);
-    //     } else {
-    //         bestMove(enemyOcean);
-    //     }
-    // }
+        if (huntMode) {
+            attackDamagedShip(enemyOcean);
+        } else {
+            bestMove(enemyOcean);
+        }
+    }
 
     private void attackDamagedShip(Ocean enemyOcean) {
         /**
