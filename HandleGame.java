@@ -7,56 +7,53 @@ public class HandleGame {
     private List<Object> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
+    public HandleGame (int level1, int level2) {
+        aivAI(level1, level2);
+    }
 
-    public void pvp() {
-        oceans.add(new Ocean());
+    public HandleGame (Ocean ocean, int level) {
+        pvAI(ocean, level);
+    }
+
+    public HandleGame (Ocean ocean1, Ocean ocean2) {
+        pvp(ocean1, ocean2);
+    }
+
+    private void pvp(Ocean ocean1, Ocean ocean2) {
+        oceans.add(ocean1);
         players.add(new Player(oceans.get(0)));
 
-        oceans.add(new Ocean());
+        oceans.add(ocean2);
         players.add(new Player(oceans.get(1)));
 
-        playTheGame();
     }
 
-
-    public void pvAI() {
-        oceans.add(new Ocean());
+    private void pvAI(Ocean ocean, int level) {
+        oceans.add(ocean);
         players.add(new Player(oceans.get(0)));
 
         oceans.add(new Ocean());
-        players.add(new AI(oceans.get(1)));
+        players.add(new AI(oceans.get(1), level));
 
-        playTheGame();
     }
 
-
-    public void aivAI() {
+    private void aivAI(int level1, int level2) {
         oceans.add(new Ocean());
-        players.add(new AI(oceans.get(0)));
+        players.add(new AI(oceans.get(0), level1));
 
         oceans.add(new Ocean());
-        players.add(new AI(oceans.get(1)));
+        players.add(new AI(oceans.get(1), level2));
 
-        playTheGame();
     }
 
+    public boolean checkIfGameOver() {
+        Ocean ocean1 = oceans.get(0);
+        Ocean ocean2 = oceans.get(1);
 
-    public void playTheGame() {
-
-        boolean endOfGame = false;
-
-        int turn = 0;
-        do {
-            Ocean oceanOfEnemy = oceans.get((turn + 1) % 2);
-            players.get(turn%2).takeATurn(oceanOfEnemy);
-            endOfGame = checkIfGameOver(oceanOfEnemy);
-            turn++;
-
-        }while(!endOfGame);
+        return (checkOcean(ocean1) && checkOcean(ocean2));
     }
 
-
-    private boolean checkIfGameOver(Ocean ocean) {
+    private boolean checkOcean(Ocean ocean) {
         String[][] board = ocean.getOceanBoard();
         for (String[] row : board) {
             for (String square : row) {
@@ -67,5 +64,15 @@ public class HandleGame {
         }
 
         return true;
+    }
+
+    public void takeATurn(int playerIndex, int x, int y) {
+        int nextPlayerIndex = (playerIndex + 1) % 2;
+        oceans.get(nextPlayerIndex).takeShot(x, y);
+    }
+
+    public void takeATurn(int playerIndex) {
+        int nextPlayerIndex = (playerIndex + 1) % 2;
+        players.get(playerIndex).takeAShoot(oceans.get(nextPlayerIndex));
     }
 }
