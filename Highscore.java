@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Highscore {
         List<String> highscores = new ArrayList<String>();
         highscores = getHighscores();
         highscores.add(createPlayerScoreLine(playersName, points));
-        // saveTop10Scores(highscores);
+        saveTop10Scores(highscores);
 
     }
 
@@ -55,5 +57,22 @@ public class Highscore {
         String playerScoreLine = String.join(",", name, date, points + "");
 
         return playerScoreLine;
+    }
+
+    private void saveTop10Scores(List<String> highscores) {
+
+        highscores = sortHighscores(highscores);
+
+        try {
+            PrintWriter writer = new PrintWriter("scores.csv", "UTF-8");
+            for (int i = 0; i < highscores.size() && i < 10; i++) {
+                writer.println(highscores.get(i));
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 }
