@@ -12,24 +12,24 @@ public class HandleGame {
     }
 
     public HandleGame (Ocean ocean) {
-        pvAI();
+        pvAI(ocean);
     }
 
-    public HandleGame (Ocean ocean, Ocean ocean2) {
-        pvp();
+    public HandleGame (Ocean ocean1, Ocean ocean2) {
+        pvp(ocea1, ocean2);
     }
 
-    public void pvp() {
-        oceans.add(new Ocean());
+    public void pvp(Ocean ocean1, Ocean ocean2) {
+        oceans.add(ocean1);
         players.add(new Player(oceans.get(0)));
 
-        oceans.add(new Ocean());
+        oceans.add(ocean2);
         players.add(new Player(oceans.get(1)));
 
     }
 
-    public void pvAI() {
-        oceans.add(new Ocean());
+    public void pvAI(Ocean ocean) {
+        oceans.add(ocean);
         players.add(new Player(oceans.get(0)));
 
         oceans.add(new Ocean());
