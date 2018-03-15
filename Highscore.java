@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Highscore {
 
-    public void addNewScore(String playersName, int points) {
+    public static void addNewScore(String playersName, int points) {
         /**
          * Updates Highscores with new score
          */
@@ -24,7 +24,7 @@ public class Highscore {
 
     }
 
-    private List<String> getHighscores() {
+    private static List<String> getHighscores() {
         /**
          * Loads highscores from file
          */
@@ -56,7 +56,7 @@ public class Highscore {
         return highscores;
     }
 
-    private String createPlayerScoreLine(String name, int points) {
+    private static String createPlayerScoreLine(String name, int points) {
         /**
          * Creates line to save with given name and points
          */
@@ -68,7 +68,7 @@ public class Highscore {
         return playerScoreLine;
     }
 
-    private void saveTop10Scores(List<String> highscores) {
+    private static void saveTop10Scores(List<String> highscores) {
         /**
          * Saves to file no more that 10 scores
          */
@@ -88,7 +88,7 @@ public class Highscore {
         }
     }
 
-    private List<String> sortHighscores(List<String> highscores) {
+    private static List<String> sortHighscores(List<String> highscores) {
         /**
          * Sorting algorithm for highscores
          */
@@ -114,7 +114,7 @@ public class Highscore {
         return highscores;
     }
 
-    public List<String> getDisplayableHighscoreList() {
+    public static List<String> getDisplayableHighscoreList() {
         /**
          * Returns list of strings to display
          */
@@ -128,7 +128,7 @@ public class Highscore {
         return displayable;
     }
 
-    private String getDisplayableLine(String highscoreLine) {
+    private static String getDisplayableLine(String highscoreLine) {
         /**
          * Creates displayable line
          */
