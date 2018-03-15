@@ -118,7 +118,9 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
         gameMode = chooseGameMode.getGameMode();
         if (gameMode.equals("aivAI")) {
-            handleGame = new HandleGame (1, 2);
+            levelFirstPlayer = getInputOfLevelFromUser("Choose level first computer: ");
+            levelSecondPlayer = getInputOfLevelFromUser("Choose level second computer: ");
+            handleGame = new HandleGame (levelFirstPlayer, levelSecondPlayer);
             messageOfGameLabel.setText("Press next...");
         }
 
