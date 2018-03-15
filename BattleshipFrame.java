@@ -160,6 +160,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             messageOfGameLabel.setText("Press next...");
 
         } else if (gameMode.equals("pvAI")) {
+            String playerName = JOptionPane.showInputDialog(null, "What is your name?");
             levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
             ocean1 = getGeneratedOcean();
             handleGame = new HandleGame(ocean1, levelFirstPlayer);
