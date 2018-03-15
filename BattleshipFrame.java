@@ -1,6 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.lang.InterruptedException;
+import java.lang.Thread;
 
 
 public class BattleshipFrame extends JFrame implements MouseListener, ActionListener {
@@ -14,15 +16,23 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JPanel oceanPanel, hudPanel;
     private String gameMode = "";
     private HandleGame handleGame;
+    private JButton nextButton;
 
     public BattleshipFrame() {
         addMenuBar();
         setLayout(new BorderLayout());
         hudPanel = new JPanel();
+        nextButton = new JButton("Next");
         hudPanel.setLayout(new GridLayout(1, 2, 20, 10));
         hudPanel.add(addOceanPanel(squaresLabelMy));
         hudPanel.add(addOceanPanel(squaresLabelEnemy));
-        add(hudPanel);
+        nextButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                simulationAIvAI();
+            }
+        });
+        add(hudPanel, BorderLayout.CENTER);
+        add(nextButton, BorderLayout.SOUTH);
         setSize(getPrefferedSize());
     }
 
@@ -95,19 +105,22 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         gameMode = chooseGameMode.getGameMode();
         if (gameMode.equals("aivAI")) {
             handleGame = new HandleGame (1, 2);
-            simulationAIvAI();
         }
     }
 
 
     private void simulationAIvAI() {
-        while (!handleGame.checkIfGameOver()) {
             handleGame.takeATurn(0);
             String[][] oceanAI1 = handleGame.getOceanBoard(0, 1);
             displayOcean(oceanAI1, squaresLabelMy);
             handleGame.takeATurn(1);
             String[][] oceanAI2 = handleGame.getOceanBoard(1, 1);
-            displayOcean(oceanAI1, squaresLabelEnemy);
+            displayOcean(oceanAI2, squaresLabelEnemy);
+            try {
+                Thread.sleep(10);
+                System.out.println("121");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
         }
     }
 
