@@ -49,4 +49,11 @@ public class Player {
          */
         return this.playerName;
     }
+
+    public int getTurns() {
+        /**
+         * Accessor method for variable 'turns'
+         */
+        return this.turns;
+    }
 }
