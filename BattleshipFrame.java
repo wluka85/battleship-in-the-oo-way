@@ -133,7 +133,6 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             handleGame.takeATurn(1);
             String[][] oceanAI2 = handleGame.getOceanBoard(1, 1);
             displayOcean(oceanAI2, squaresLabelEnemy);
-        }
     }
 
 
