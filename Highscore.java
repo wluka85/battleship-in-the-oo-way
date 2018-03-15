@@ -12,14 +12,14 @@ import java.util.List;
 
 public class Highscore {
 
-    public static void addNewScore(String playersName, int points) {
+    public static void addNewScore(String playersName, int turns) {
         /**
          * Updates Highscores with new score
          */
 
         List<String> highscores = new ArrayList<String>();
         highscores = getHighscores();
-        highscores.add(0, createPlayerScoreLine(playersName, points));
+        highscores.add(0, createPlayerScoreLine(playersName, turns));
         saveTop10Scores(highscores);
 
     }
@@ -56,14 +56,14 @@ public class Highscore {
         return highscores;
     }
 
-    private static String createPlayerScoreLine(String name, int points) {
+    private static String createPlayerScoreLine(String name, int turns) {
         /**
-         * Creates line to save with given name and points
+         * Creates line to save with given name and turns
          */
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
-        String playerScoreLine = String.join(",", name, date, points + "");
+        String playerScoreLine = String.join(",", name, date, turns + "");
 
         return playerScoreLine;
     }
@@ -99,10 +99,10 @@ public class Highscore {
 
             for (int i = 0; i < highscores.size() - 1; i++) {
 
-                int pointsAtI = Integer.parseInt(highscores.get(i).split(",")[2]);
-                int pointsAtNext = Integer.parseInt(highscores.get(i + 1).split(",")[2]);
+                int turnsAtI = Integer.parseInt(highscores.get(i).split(",")[2]);
+                int turnsAtNext = Integer.parseInt(highscores.get(i + 1).split(",")[2]);
 
-                if (pointsAtNext > pointsAtI) {
+                if (turnsAtNext < turnsAtI) {
                     notDone = true;
                     String temp = highscores.get(i);
                     highscores.set(i, highscores.get(i + 1));
