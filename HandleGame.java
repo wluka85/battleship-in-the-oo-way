@@ -81,7 +81,7 @@ public class HandleGame {
         if (boardNumber == 0) {
             return oceans.get(playerIndex).getOceanBoard();
         } else {
-            if (players.get(playerIndex).getClass().equals(AI)) {
+            if (players.get(playerIndex).getClass().getName().equals("AI")) {
                 AI currentPlayer = (AI) players.get(playerIndex);
                 return currentPlayer.getEnemyBoard();
             } else {
