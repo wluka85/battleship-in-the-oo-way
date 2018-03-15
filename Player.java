@@ -37,10 +37,16 @@ public class Player {
     }
 
     public void setName(String newName) {
+        /**
+         * Method used to change 'playerName' variable
+         */
         this.playerName = newName;;
     }
 
     public String getName(){
+        /**
+         * Accessor method for variable 'playerName'
+         */
         return this.playerName;
     }
 }
