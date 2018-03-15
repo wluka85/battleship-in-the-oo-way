@@ -1,12 +1,6 @@
 import java.awt.*;
-import java.awt.Color;
 import javax.swing.*;
-import javax.swing.filechooser.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.StringTokenizer;
-import java.time.LocalDate;
-import java.util.NoSuchElementException;
+
 
 public class HighScoreDialog extends JDialog {
 
@@ -21,6 +15,7 @@ public class HighScoreDialog extends JDialog {
         super(owner, "Choose game mode", true);
         setLayout(new BorderLayout());
         highScoreTextArea = new JTextArea();
+        highScoreTextArea.setText(highScore);
         highScoreTextArea.setEditable(false);
         add(highScoreTextArea, BorderLayout.CENTER);
         setSize(getPrefferedSize());
