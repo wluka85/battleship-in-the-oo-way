@@ -63,7 +63,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         controlPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                if (gameMode.equals("aivAI")) {
+                if (gameMode.equals("aivAI") && !handleGame.checkIfGameOver()) {
                     simulationAIvAI();
                 }
             }
@@ -104,12 +104,14 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
 
     public void mouseClicked(MouseEvent e) {
         Object source = e.getSource();
-        for (int i = 0; i < squaresLabelMy.length; i++) {
-            for (int j = 0; j < squaresLabelMy[i].length; j++) {
-                if(source == squaresLabelMy[i][j]) {
-
-                }
-            }
+        int[] position =  getXY(source);
+        if (gameMode.equals("pvAI") && !handleGame.checkIfGameOver()){
+            handleGame.takeATurn(0, position[0], position[1]);
+            String[][] oceanPl = handleGame.getOceanBoard(0, 1);
+            displayOcean(oceanPl, squaresLabelMy);
+            handleGame.takeATurn(1);
+            String[][] oceanEnemy = handleGame.getOceanBoard(0, 0);
+            displayOcean(oceanEnemy, squaresLabelEnemy);
         }
     }
 
