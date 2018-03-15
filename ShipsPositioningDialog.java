@@ -92,9 +92,9 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
         int[] position =  getXY(source);
         lengthShip = getLengthShip(nameShip);
         ship = new Ship(position[0], position[1], lengthShip, vertical);
-        ocean.addShip(ship);
-        displayOcean(ocean);
         if (OceanValidator.validateOcean(ocean.getOceanBoard(), ship)) {
+            ocean.addShip(ship);
+            displayOcean(ocean);
             counterShip += 1;
             if (counterShip == 5) {
                 dispose();
