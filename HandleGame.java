@@ -153,4 +153,17 @@ public class HandleGame {
         List<String> highscoreList = Highscore.getDisplayableHighscoreList();
         return String.join("\n", highscoreList);
     }
+
+    public String getPlayerScore() {
+        /**
+         * Method returns info about player result
+         * (Used in PvAI only)
+         */
+        StringBuilder result = new StringBuilder();
+        Player player = (Player) players.get(0);
+        result.append("Player " + player.getName() + ". Turns: " + player.getTurns());
+        return result.toString();
+
+
+    }
 }
