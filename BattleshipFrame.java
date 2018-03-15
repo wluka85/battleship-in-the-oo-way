@@ -63,6 +63,24 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             public void actionPerformed(ActionEvent e) {
                 if (gameMode.equals("aivAI") && !handleGame.checkIfGameOver()) {
                     simulationAIvAI();
+                } else if (gameMode.equals("pvp") && phaseGame == 1) {
+                    phaseGame += 1;
+                    messageOfGameLabel.setText("Player 1 take shot...");
+                    displayOceans(0);
+
+                } else if (gameMode.equals("pvp") && phaseGame == 3) {
+                    phaseGame += 1;
+                    clearOceans();
+                    messageOfGameLabel.setText("Player 2 your turn press next...");
+                } else if (gameMode.equals("pvp") && phaseGame == 4) {
+                    phaseGame += 1;
+                    messageOfGameLabel.setText("Player 2 take shot...");
+                    displayOceans(1);
+                } else if (gameMode.equals("pvp") && phaseGame == 6) {
+                    phaseGame += 1;
+                    messageOfGameLabel.setText("Player 1 your turn press next...");
+                    clearOceans();
+                    phaseGame = 1;
                 }
             }
         });
@@ -105,8 +123,31 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             handleGame.takeATurn(1);
             String[][] oceanEnemy = handleGame.getOceanBoard(0, 0);
             displayOcean(oceanEnemy, squaresLabelEnemy);
+
+        } else if (gameMode.equals("pvp") && !handleGame.checkIfGameOver()) {
+            if (phaseGame == 2) {
+                handleGame.takeATurn(0, position[0], position[1]);
+                displayOceans(0);
+                phaseGame++;
+                messageOfGameLabel.setText("Press next...");
+
+            } else if (phaseGame == 5) {
+                handleGame.takeATurn(1, position[0], position[1]);
+                displayOceans(1);
+                messageOfGameLabel.setText("Press next...");
+                phaseGame++;
+            }
         }
     }
+
+
+    private void displayOceans(int playerIndex) {
+        String[][] oceanPl = handleGame.getOceanBoard(playerIndex, 1);
+        displayOcean(oceanPl, squaresLabelMy);
+        String[][] oceanEnemy = handleGame.getOceanBoard(playerIndex, 0);
+        displayOcean(oceanEnemy, squaresLabelEnemy);
+    }
+
 
     public void actionPerformed(ActionEvent e) {
         ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
@@ -128,7 +169,9 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             ocean1 = getGeneratedOcean();
             messageOfGameLabel.setText("Player 2 place your ships...");
             ocean2 = getGeneratedOcean();
+            handleGame = new HandleGame (ocean1, ocean2);
             phaseGame = 1;
+            messageOfGameLabel.setText("Player 1 your turn, press next...");
         }
     }
 
@@ -173,6 +216,25 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         }
     }
 
+<<<<<<< HEAD
+=======
+
+    private void clearOceans() {
+        for (int i = 0; i < squaresLabelMy.length; i++) {
+            for (int j = 0; j < squaresLabelMy[i].length; j++) {
+                squaresLabelMy[i][j].setText("");
+            }
+        }
+
+        for (int i = 0; i < squaresLabelEnemy.length; i++) {
+            for (int j = 0; j < squaresLabelEnemy[i].length; j++) {
+                squaresLabelEnemy[i][j].setText("");
+            }
+        }
+    }
+
+
+>>>>>>> BattleshipFrame
     private int[] getXY(Object source) {
         for (int i = 0; i < squaresLabelMy.length; i++) {
             for (int j = 0; j < squaresLabelMy[i].length; j++) {
