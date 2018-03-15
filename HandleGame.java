@@ -7,7 +7,7 @@ public class HandleGame {
     private List<Object> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
 
-    public HandleGame (int level1, int level2) {
+    public HandleGame(int level1, int level2) {
         /**
          * Starts simulation game
          * AI vs AI
@@ -15,7 +15,7 @@ public class HandleGame {
         aivAI(level1, level2);
     }
 
-    public HandleGame (Ocean ocean, int level) {
+    public HandleGame(Ocean ocean, int level) {
         /**
          * Starts PvAI game
          * Player vs AI
@@ -23,7 +23,7 @@ public class HandleGame {
         pvAI(ocean, level);
     }
 
-    public HandleGame (Ocean ocean1, Ocean ocean2) {
+    public HandleGame(Ocean ocean1, Ocean ocean2) {
         /**
          * Starts PvP game
          * Player vs Player

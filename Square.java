@@ -14,28 +14,25 @@ public class Square {
     private int x;
     private int y;
 
-
     public Square(int x, int y) {
-    /**
-     * Constructor for Square object
-     */
+        /**
+         * Constructor for Square object
+         */
         this.x = x;
         this.y = y;
     }
 
-
     public int getX() {
-    /**
-     * Accessor method for 'x' variable
-     */
+        /**
+         * Accessor method for 'x' variable
+         */
         return x;
     }
 
-
     public int getY() {
-    /**
-     * Accessor method for 'y' variable
-     */
+        /**
+         * Accessor method for 'y' variable
+         */
         return y;
     }
 }

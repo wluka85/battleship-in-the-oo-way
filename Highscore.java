@@ -94,19 +94,19 @@ public class Highscore {
          */
         boolean notDone = true;
 
-        while (notDone){
+        while (notDone) {
             notDone = false;
 
-            for(int i = 0; i < highscores.size()-1; i++){
+            for (int i = 0; i < highscores.size() - 1; i++) {
 
                 int pointsAtI = Integer.parseInt(highscores.get(i).split(",")[2]);
-                int pointsAtNext = Integer.parseInt(highscores.get(i+1).split(",")[2]);
+                int pointsAtNext = Integer.parseInt(highscores.get(i + 1).split(",")[2]);
 
-                if(pointsAtNext > pointsAtI){
+                if (pointsAtNext > pointsAtI) {
                     notDone = true;
                     String temp = highscores.get(i);
-                    highscores.set(i, highscores.get(i+1));
-                    highscores.set(i+1, temp);
+                    highscores.set(i, highscores.get(i + 1));
+                    highscores.set(i + 1, temp);
                 }
             }
         }
@@ -114,14 +114,14 @@ public class Highscore {
         return highscores;
     }
 
-    public List<String> getDisplayableHighscoreList () {
+    public List<String> getDisplayableHighscoreList() {
         /**
          * Returns list of strings to display
          */
         List<String> highscores = getHighscores();
         List<String> displayable = new ArrayList<String>();
 
-        for(String highscoreLine : highscores) {
+        for (String highscoreLine : highscores) {
             displayable.add(getDisplayableLine(highscoreLine));
         }
 
