@@ -8,4 +8,8 @@ public class Player {
     public Player(Ocean ocean) {
         this.ocean = ocean;
     }
+
+    public String[][] getEnemyBoard() {
+        return enemyOcean;
+    }
 }
