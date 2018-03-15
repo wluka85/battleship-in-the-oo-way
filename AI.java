@@ -397,7 +397,7 @@ public class AI {
          * square on x, y coordinates
          * 
          */
-        return (y + 1 < OCEAN_SIZE && enemyBoard[x - 1][y].equals(" "));
+        return (y + 1 < OCEAN_SIZE && enemyBoard[x][y + 1].equals(" "));
     }
 
     private void attackAdjacent(int x, int y, Ocean enemyOcean) {
