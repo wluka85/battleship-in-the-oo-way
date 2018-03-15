@@ -13,6 +13,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JMenuItem menuItemNewGame, menuItemExit;
     private JLabel[][] squaresLabelMy = new JLabel[10][10];
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
+    private JLabel messageOfGameLabel;
     private JPanel oceanPanel, hudPanel, controlPanel;
     private String gameMode = "";
     private HandleGame handleGame;
@@ -52,8 +53,11 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
 
     private void addControlPanel() {
         controlPanel = new JPanel();
+        controlPanel.setLayout(new GridLayout(1, 2, 500, 10));
+        messageOfGameLabel = new JLabel("Choose new Game...");
         add(controlPanel, BorderLayout.SOUTH);
         nextButton = new JButton("Next");
+        controlPanel.add(messageOfGameLabel);
         controlPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
