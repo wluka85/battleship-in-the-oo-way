@@ -124,9 +124,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             levelSecondPlayer = getInputOfLevelFromUser("Choose level second computer: ");
             handleGame = new HandleGame (levelFirstPlayer, levelSecondPlayer);
             messageOfGameLabel.setText("Press next...");
-        }
-
-        if (gameMode.equals("pvAI")) {
+        } else if (gameMode.equals("pvAI")) {
             levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
             ocean1 = getGeneratedOcean();
             handleGame = new HandleGame (ocean1, levelFirstPlayer);
