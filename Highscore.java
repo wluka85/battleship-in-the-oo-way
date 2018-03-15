@@ -13,6 +13,9 @@ import java.util.List;
 public class Highscore {
 
     public void addNewScore(String playersName, int points) {
+        /**
+         * Updates Highscores with new score
+         */
 
         List<String> highscores = new ArrayList<String>();
         highscores = getHighscores();
@@ -22,6 +25,9 @@ public class Highscore {
     }
 
     private List<String> getHighscores() {
+        /**
+         * Loads highscores from file
+         */
         List<String> highscores = new ArrayList<String>();
         File file = new File("scores.csv");
         BufferedReader reader = null;
@@ -51,6 +57,9 @@ public class Highscore {
     }
 
     private String createPlayerScoreLine(String name, int points) {
+        /**
+         * Creates line to save with given name and points
+         */
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
         LocalDateTime now = LocalDateTime.now();
         String date = dtf.format(now);
@@ -60,6 +69,9 @@ public class Highscore {
     }
 
     private void saveTop10Scores(List<String> highscores) {
+        /**
+         * Saves to file no more that 10 scores
+         */
 
         highscores = sortHighscores(highscores);
 
@@ -77,21 +89,24 @@ public class Highscore {
     }
 
     private List<String> sortHighscores(List<String> highscores) {
+        /**
+         * Sorting algorithm for highscores
+         */
         boolean notDone = true;
 
-        while (notDone){
+        while (notDone) {
             notDone = false;
 
-            for(int i = 0; i < highscores.size()-1; i++){
+            for (int i = 0; i < highscores.size() - 1; i++) {
 
                 int pointsAtI = Integer.parseInt(highscores.get(i).split(",")[2]);
-                int pointsAtNext = Integer.parseInt(highscores.get(i+1).split(",")[2]);
+                int pointsAtNext = Integer.parseInt(highscores.get(i + 1).split(",")[2]);
 
-                if(pointsAtNext > pointsAtI){
+                if (pointsAtNext > pointsAtI) {
                     notDone = true;
                     String temp = highscores.get(i);
-                    highscores.set(i, highscores.get(i+1));
-                    highscores.set(i+1, temp);
+                    highscores.set(i, highscores.get(i + 1));
+                    highscores.set(i + 1, temp);
                 }
             }
         }
@@ -99,11 +114,14 @@ public class Highscore {
         return highscores;
     }
 
-    public List<String> getDisplayableHighscoreList () {
+    public List<String> getDisplayableHighscoreList() {
+        /**
+         * Returns list of strings to display
+         */
         List<String> highscores = getHighscores();
         List<String> displayable = new ArrayList<String>();
 
-        for(String highscoreLine : highscores) {
+        for (String highscoreLine : highscores) {
             displayable.add(getDisplayableLine(highscoreLine));
         }
 
@@ -111,6 +129,9 @@ public class Highscore {
     }
 
     private String getDisplayableLine(String highscoreLine) {
+        /**
+         * Creates displayable line
+         */
 
         String[] highscoreParts = highscoreLine.split(",");
         return String.join(" | ", highscoreParts);
