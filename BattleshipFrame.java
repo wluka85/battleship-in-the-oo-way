@@ -142,7 +142,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             }
         }
         if (handleGame.checkIfGameOver()) {
-
+            JOptionPane.showMessageDialog(null, handleGame.getGameResult());
             if (gameMode.equals("pvAI")) {
                 handleGame.savePlayerScore();
                 gameMode = "";
