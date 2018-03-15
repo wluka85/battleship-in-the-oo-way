@@ -84,6 +84,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
                     messageOfGameLabel.setText("Player 1 your turn press next...");
                     clearOceans();
                     phaseGame = 1;
+                } else if (handleGame.checkIfGameOver()) {
+                    JOptionPane.showMessageDialog(null, handleGame.getGameResult());
                 }
             }
         });
