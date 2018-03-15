@@ -61,7 +61,9 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         controlPanel.add(nextButton);
         nextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                simulationAIvAI();
+                if (gameMode.equals("aivAI")) {
+                    simulationAIvAI();
+                }
             }
         });
     }
