@@ -60,7 +60,8 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(OCEAN_SIZE);
             int y = generator.nextInt(OCEAN_SIZE);
-            carrier = new Ship(x, y, 5);
+            boolean vertical = generator.nextBoolean();
+            carrier = new Ship(x, y, 5, vertical);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), carrier);
         } while (!validShipLocation);
         ocean.addShip(carrier);
@@ -77,7 +78,8 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(OCEAN_SIZE);
             int y = generator.nextInt(OCEAN_SIZE);
-            battleship = new Ship(x, y, 4);
+            boolean vertical = generator.nextBoolean();
+            battleship = new Ship(x, y, 4, vertical);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), battleship);
         } while (!validShipLocation);
         ocean.addShip(battleship);
@@ -94,7 +96,8 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(OCEAN_SIZE);
             int y = generator.nextInt(OCEAN_SIZE);
-            cruiser = new Ship(x, y, 3);
+            boolean vertical = generator.nextBoolean();
+            cruiser = new Ship(x, y, 3, vertical);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), cruiser);
         } while (!validShipLocation);
         ocean.addShip(cruiser);
@@ -112,7 +115,8 @@ public class AI {
             Random generator = new Random();
             int x = generator.nextInt(OCEAN_SIZE);
             int y = generator.nextInt(OCEAN_SIZE);
-            destroyer = new Ship(x, y, 2);
+            boolean vertical = generator.nextBoolean();
+            destroyer = new Ship(x, y, 2, vertical);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), destroyer);
         } while (!validShipLocation);
         ocean.addShip(destroyer);
@@ -397,7 +401,7 @@ public class AI {
          * square on x, y coordinates
          * 
          */
-        return (y + 1 < OCEAN_SIZE && enemyBoard[x - 1][y].equals(" "));
+        return (y + 1 < OCEAN_SIZE && enemyBoard[x][y + 1].equals(" "));
     }
 
     private void attackAdjacent(int x, int y, Ocean enemyOcean) {
@@ -408,28 +412,37 @@ public class AI {
          * 
          */
 
+        int x2, y2;
         String shootResult;
         if (uncheckedLeft(x, y)) {
             shootResult = enemyOcean.takeShot(x - 1, y);
+            x2 = x - 1;
+            y2 = y;
         } else if (uncheckedRight(x, y)) {
             shootResult = enemyOcean.takeShot(x + 1, y);
+            x2 = x + 1;
+            y2 = y;
         } else if (uncheckedTop(x, y)) {
             shootResult = enemyOcean.takeShot(x, y - 1);
+            x2 = x;
+            y2 = y - 1;
         } else {
             shootResult = enemyOcean.takeShot(x, y + 1);
+            x2 = x;
+            y2 = y + 1;
         }
 
         switch (shootResult) {
         case "Hit":
-            handleHit(x, y);
+            handleHit(x2, y2);
             huntMode = true;
             break;
         case "Hit and sunk":
-            handleHitAndSunk(x, y);
+            handleHitAndSunk(x2, y2);
             huntMode = false;
             break;
         case "Miss":
-            enemyBoard[x][y] = "O";
+            enemyBoard[x2][y2] = "O";
             break;
         }
     }
@@ -463,10 +476,12 @@ public class AI {
 
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
-                uncheckedAdjacent = countUncheckedAdjacent(x, y);
-                if (uncheckedAdjacent == 1) {
-                    attackAdjacent(x, y, enemyOcean);
-                    return true;
+                if (enemyBoard[x][y].equals(" ")){
+                    uncheckedAdjacent = countUncheckedAdjacent(x, y);
+                    if (uncheckedAdjacent == 1) {
+                        attackAdjacent(x, y, enemyOcean);
+                        return true;
+                    }
                 }
             }
         }
