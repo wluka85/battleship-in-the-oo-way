@@ -136,4 +136,13 @@ public class HandleGame {
 
         }
     }
+
+    public void setNameOfPlayer(String newName) {
+        /**
+         * Method updates name of first player
+         * (Used in PvAI only)
+         */
+        Player player = (Player) players.get(0);
+        player.setName(newName);
+    }
 }
