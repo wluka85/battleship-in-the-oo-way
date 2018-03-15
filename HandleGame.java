@@ -187,4 +187,14 @@ public class HandleGame {
             }
         }
     }
+
+    public void savePlayerScore() {
+        /**
+         * Method saves player score on highscore list
+         */
+        Player player = (Player) players.get(0);
+        String playerName = player.getName();
+        int turns = player.getTurns();
+        Highscore.addNewScore(playerName, turns);
+    }
 }
