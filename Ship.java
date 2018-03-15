@@ -26,6 +26,7 @@ public class Ship {
         this.y = y;
         this.shipLength = shipLength;
         this.vertical = vertical;
+        this.healthPoints = shipLength;
         makeShip();
     }
 
