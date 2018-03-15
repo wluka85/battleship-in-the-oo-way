@@ -163,7 +163,28 @@ public class HandleGame {
         Player player = (Player) players.get(0);
         result.append("Player " + player.getName() + ". Turns: " + player.getTurns());
         return result.toString();
+    }
 
+    public String getGameResult() {
+        /**
+         * Returns info about winner
+         * (Used in PvP and AIvAI only)
+         */
+        Ocean player1Ocean = oceans.get(0);
+        boolean player1Won = checkOcean(player1Ocean);
 
+        if (players.get(0).getClass().getName().equals("AI")) {
+            if (player1Won) {
+                return "AI 1 won!";
+            } else {
+                return "AI 2 won!";
+            }
+        } else {
+            if (player1Won) {
+                return "Player 1 won!";
+            } else {
+                return "Player 2 won!";
+            }
+        }
     }
 }
