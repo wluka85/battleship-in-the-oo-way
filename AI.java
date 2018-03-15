@@ -408,28 +408,37 @@ public class AI {
          * 
          */
 
+        int x2, y2;
         String shootResult;
         if (uncheckedLeft(x, y)) {
             shootResult = enemyOcean.takeShot(x - 1, y);
+            x2 = x - 1;
+            y2 = y;
         } else if (uncheckedRight(x, y)) {
             shootResult = enemyOcean.takeShot(x + 1, y);
+            x2 = x + 1;
+            y2 = y;
         } else if (uncheckedTop(x, y)) {
             shootResult = enemyOcean.takeShot(x, y - 1);
+            x2 = x;
+            y2 = y - 1;
         } else {
             shootResult = enemyOcean.takeShot(x, y + 1);
+            x2 = x;
+            y2 = y + 1;
         }
 
         switch (shootResult) {
         case "Hit":
-            handleHit(x, y);
+            handleHit(x2, y2);
             huntMode = true;
             break;
         case "Hit and sunk":
-            handleHitAndSunk(x, y);
+            handleHitAndSunk(x2, y2);
             huntMode = false;
             break;
         case "Miss":
-            enemyBoard[x][y] = "O";
+            enemyBoard[x2][y2] = "O";
             break;
         }
     }
