@@ -226,6 +226,21 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     }
 
 
+    private void clearOceans() {
+        for (int i = 0; i < squaresLabelMy.length; i++) {
+            for (int j = 0; j < squaresLabelMy[i].length; j++) {
+                squaresLabelMy[i][j].setText("");
+            }
+        }
+
+        for (int i = 0; i < squaresLabelEnemy.length; i++) {
+            for (int j = 0; j < squaresLabelEnemy[i].length; j++) {
+                squaresLabelEnemy[i][j].setText("");
+            }
+        }
+    }
+
+
     private int[] getXY(Object source) {
         for (int i = 0; i < squaresLabelMy.length; i++) {
             for (int j = 0; j < squaresLabelMy[i].length; j++) {
