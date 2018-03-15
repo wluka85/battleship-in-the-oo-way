@@ -177,6 +177,18 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     }
 
 
+    private int[] getXY(Object source) {
+        for (int i = 0; i < squaresLabelMy.length; i++) {
+            for (int j = 0; j < squaresLabelMy[i].length; j++) {
+                if(source == squaresLabelMy[i][j]) {
+                    return new int[] {i, j};
+                }
+            }
+        }
+        return new int[] {0, 0};
+    }
+
+
     @Override
     public void mouseEntered(MouseEvent e) {
     }
