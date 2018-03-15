@@ -49,8 +49,7 @@ public class HandleGame {
     public boolean checkIfGameOver() {
         Ocean ocean1 = oceans.get(0);
         Ocean ocean2 = oceans.get(1);
-
-        return (checkOcean(ocean1) && checkOcean(ocean2));
+        return (checkOcean(ocean1) || checkOcean(ocean2));
     }
 
     private boolean checkOcean(Ocean ocean) {
@@ -68,7 +67,9 @@ public class HandleGame {
 
     public void takeATurn(int playerIndex, int x, int y) {
         int nextPlayerIndex = (playerIndex + 1) % 2;
-        oceans.get(nextPlayerIndex).takeShot(x, y);
+        String result = oceans.get(nextPlayerIndex).takeShot(x, y);
+        Player currentPlayer = (Player) players.get(playerIndex);
+        currentPlayer.updateEnemyOcean(x, y, result);
     }
 
     public void takeATurn(int playerIndex) {
@@ -81,7 +82,7 @@ public class HandleGame {
         if (boardNumber == 0) {
             return oceans.get(playerIndex).getOceanBoard();
         } else {
-            if (players.get(playerIndex).getClass().equals(AI)) {
+            if (players.get(playerIndex).getClass().getName().equals("AI")) {
                 AI currentPlayer = (AI) players.get(playerIndex);
                 return currentPlayer.getEnemyBoard();
             } else {
