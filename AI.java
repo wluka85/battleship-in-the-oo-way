@@ -472,10 +472,12 @@ public class AI {
 
         for (int x = 0; x < OCEAN_SIZE; x++) {
             for (int y = 0; y < OCEAN_SIZE; y++) {
-                uncheckedAdjacent = countUncheckedAdjacent(x, y);
-                if (uncheckedAdjacent == 1) {
-                    attackAdjacent(x, y, enemyOcean);
-                    return true;
+                if (enemyBoard[x][y].equals(" ")){
+                    uncheckedAdjacent = countUncheckedAdjacent(x, y);
+                    if (uncheckedAdjacent == 1) {
+                        attackAdjacent(x, y, enemyOcean);
+                        return true;
+                    }
                 }
             }
         }
