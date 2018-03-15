@@ -96,7 +96,6 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
             ocean.addShip(ship);
             displayOcean(ocean);
             counterShip += 1;
-            System.out.println(counterShip);
             if (counterShip == 5) {
                 dispose();
             } else {
