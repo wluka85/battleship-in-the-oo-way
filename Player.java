@@ -3,6 +3,8 @@ public class Player {
 
     private String[][] enemyOcean = new String[10][10];
     public Ocean ocean;
+    private int turns = 0;
+    private String playerName = "MentorBot";
 
     public Player(Ocean ocean) {
         /**
@@ -31,5 +33,27 @@ public class Player {
             enemyOcean[x][y] = "O";
             break;
         }
+        turns++;
+    }
+
+    public void setName(String newName) {
+        /**
+         * Method used to change 'playerName' variable
+         */
+        this.playerName = newName;;
+    }
+
+    public String getName(){
+        /**
+         * Accessor method for variable 'playerName'
+         */
+        return this.playerName;
+    }
+
+    public int getTurns() {
+        /**
+         * Accessor method for variable 'turns'
+         */
+        return this.turns;
     }
 }

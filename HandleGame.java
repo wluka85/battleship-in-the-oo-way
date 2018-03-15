@@ -136,4 +136,65 @@ public class HandleGame {
 
         }
     }
+
+    public void setNameOfPlayer(String newName) {
+        /**
+         * Method updates name of first player
+         * (Used in PvAI only)
+         */
+        Player player = (Player) players.get(0);
+        player.setName(newName);
+    }
+
+    public String getHighscores() {
+        /**
+         * Method returns highscore list as single string
+         */
+        List<String> highscoreList = Highscore.getDisplayableHighscoreList();
+        return String.join("\n", highscoreList);
+    }
+
+    public String getPlayerScore() {
+        /**
+         * Method returns info about player result
+         * (Used in PvAI only)
+         */
+        StringBuilder result = new StringBuilder();
+        Player player = (Player) players.get(0);
+        result.append("Player " + player.getName() + ". Turns: " + player.getTurns());
+        return result.toString();
+    }
+
+    public String getGameResult() {
+        /**
+         * Returns info about winner
+         * (Used in PvP and AIvAI only)
+         */
+        Ocean player1Ocean = oceans.get(0);
+        boolean player1Won = checkOcean(player1Ocean);
+
+        if (players.get(0).getClass().getName().equals("AI")) {
+            if (player1Won) {
+                return "AI 1 won!";
+            } else {
+                return "AI 2 won!";
+            }
+        } else {
+            if (player1Won) {
+                return "Player 1 won!";
+            } else {
+                return "Player 2 won!";
+            }
+        }
+    }
+
+    public void savePlayerScore() {
+        /**
+         * Method saves player score on highscore list
+         */
+        Player player = (Player) players.get(0);
+        String playerName = player.getName();
+        int turns = player.getTurns();
+        Highscore.addNewScore(playerName, turns);
+    }
 }
