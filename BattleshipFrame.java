@@ -9,7 +9,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private static final int DEFAULT_HEIGHT = 500;
     private JMenuBar menuBar;
     private JMenu menuGame;
-    private JMenuItem menuItemNewGame, menuItemExit;
+    private JMenuItem menuItemNewGame, menuItemHighScore, menuItemExit;
     private JLabel[][] squaresLabelMy = new JLabel[10][10];
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
     private JLabel messageOfGameLabel;
@@ -38,10 +38,13 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         setJMenuBar(menuBar);
         menuGame = new JMenu("Game");
         menuItemNewGame = new JMenuItem("New Game");
+        menuItemHighScore = new JMenuItem("High Score");
         menuItemExit = new JMenuItem("Exit");
         menuGame.add(menuItemNewGame);
+        menuGame.add(menuItemHighScore);
         menuGame.add(menuItemExit);
         menuBar.add(menuGame);
+        menuItemHighScore.addActionListener(this);
 
         menuItemNewGame.addActionListener(this);
         menuItemExit.addActionListener(new ActionListener() {
@@ -150,29 +153,34 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
 
 
     public void actionPerformed(ActionEvent e) {
-        ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
-        gameMode = chooseGameMode.getGameMode();
+        Object source = e.getSource();
+        if (source == menuItemHighScore) {
+            HighScoreDialog highScoreDialog = new HighScoreDialog(this);
+        } else if (source == menuItemNewGame){
+            ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
+            gameMode = chooseGameMode.getGameMode();
 
-        if (gameMode.equals("aivAI")) {
-            levelFirstPlayer = getInputOfLevelFromUser("Choose level first computer: ");
-            levelSecondPlayer = getInputOfLevelFromUser("Choose level second computer: ");
-            handleGame = new HandleGame(levelFirstPlayer, levelSecondPlayer);
-            messageOfGameLabel.setText("Press next...");
+            if (gameMode.equals("aivAI")) {
+                levelFirstPlayer = getInputOfLevelFromUser("Choose level first computer: ");
+                levelSecondPlayer = getInputOfLevelFromUser("Choose level second computer: ");
+                handleGame = new HandleGame(levelFirstPlayer, levelSecondPlayer);
+                messageOfGameLabel.setText("Press next...");
 
-        } else if (gameMode.equals("pvAI")) {
-            String playerName = JOptionPane.showInputDialog(null, "What is your name?");
-            levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
-            ocean1 = getGeneratedOcean();
-            handleGame = new HandleGame(ocean1, levelFirstPlayer);
+            } else if (gameMode.equals("pvAI")) {
+                String playerName = JOptionPane.showInputDialog(null, "What is your name?");
+                levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
+                ocean1 = getGeneratedOcean();
+                handleGame = new HandleGame(ocean1, levelFirstPlayer);
 
-        } else if (gameMode.equals("pvp")) {
-            messageOfGameLabel.setText("Player 1 place your ships...");
-            ocean1 = getGeneratedOcean();
-            messageOfGameLabel.setText("Player 2 place your ships...");
-            ocean2 = getGeneratedOcean();
-            handleGame = new HandleGame (ocean1, ocean2);
-            phaseGame = 1;
-            messageOfGameLabel.setText("Player 1 your turn, press next...");
+            } else if (gameMode.equals("pvp")) {
+                messageOfGameLabel.setText("Player 1 place your ships...");
+                ocean1 = getGeneratedOcean();
+                messageOfGameLabel.setText("Player 2 place your ships...");
+                ocean2 = getGeneratedOcean();
+                handleGame = new HandleGame (ocean1, ocean2);
+                phaseGame = 1;
+                messageOfGameLabel.setText("Player 1 your turn, press next...");
+            }
         }
     }
 
