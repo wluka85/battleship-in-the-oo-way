@@ -13,7 +13,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JMenuItem menuItemNewGame, menuItemExit;
     private JLabel[][] squaresLabelMy = new JLabel[10][10];
     private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
-    private JPanel oceanPanel, hudPanel;
+    private JPanel oceanPanel, hudPanel, controlPanel;
     private String gameMode = "";
     private HandleGame handleGame;
     private JButton nextButton;
@@ -22,17 +22,11 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         addMenuBar();
         setLayout(new BorderLayout());
         hudPanel = new JPanel();
-        nextButton = new JButton("Next");
         hudPanel.setLayout(new GridLayout(1, 2, 20, 10));
         hudPanel.add(addOceanPanel(squaresLabelMy));
         hudPanel.add(addOceanPanel(squaresLabelEnemy));
-        nextButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                simulationAIvAI();
-            }
-        });
+        addControlPanel();
         add(hudPanel, BorderLayout.CENTER);
-        add(nextButton, BorderLayout.SOUTH);
         setSize(getPrefferedSize());
     }
 
@@ -48,12 +42,24 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
       menuBar.add(menuGame);
 
       menuItemNewGame.addActionListener(this);
-
       menuItemExit.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-          dispose();
-        }
+          public void actionPerformed(ActionEvent e) {
+              dispose();
+          }
       });
+    }
+
+
+    private void addControlPanel() {
+        controlPanel = new JPanel();
+        add(controlPanel, BorderLayout.SOUTH);
+        nextButton = new JButton("Next");
+        controlPanel.add(nextButton);
+        nextButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                simulationAIvAI();
+            }
+        });
     }
 
 
