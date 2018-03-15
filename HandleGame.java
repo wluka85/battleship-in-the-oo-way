@@ -145,4 +145,12 @@ public class HandleGame {
         Player player = (Player) players.get(0);
         player.setName(newName);
     }
+
+    public String getHighscores() {
+        /**
+         * Method returns highscore list as single string
+         */
+        List<String> highscoreList = Highscore.getDisplayableHighscoreList();
+        return String.join("\n", highscoreList);
+    }
 }
