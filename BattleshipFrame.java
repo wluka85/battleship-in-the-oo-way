@@ -126,8 +126,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             handleGame.takeATurn(1);
             String[][] oceanEnemy = handleGame.getOceanBoard(0, 0);
             displayOcean(oceanEnemy, squaresLabelEnemy);
-
-        } else if (gameMode.equals("pvp") && !handleGame.checkIfGameOver()) {
+        }
+         else if (gameMode.equals("pvp") && !handleGame.checkIfGameOver()) {
             if (phaseGame == 2) {
                 handleGame.takeATurn(0, position[0], position[1]);
                 displayOceans(0);
@@ -139,6 +139,12 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
                 displayOceans(1);
                 messageOfGameLabel.setText("Press next...");
                 phaseGame++;
+            }
+        }
+        if (handleGame.checkIfGameOver()) {
+            
+            if (gameMode.equals("pvAI")) {
+                handleGame.savePlayerScore();
             }
         }
     }
@@ -155,7 +161,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == menuItemHighScore) {
-            HighScoreDialog highScoreDialog = new HighScoreDialog(this);
+            handleGame = new HandleGame(1, 1);
+            HighScoreDialog highScoreDialog = new HighScoreDialog(this, handleGame.getHighscores());
         } else if (source == menuItemNewGame){
             ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
             gameMode = chooseGameMode.getGameMode();
@@ -171,6 +178,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
                 levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
                 ocean1 = getGeneratedOcean();
                 handleGame = new HandleGame(ocean1, levelFirstPlayer);
+                handleGame.setNameOfPlayer(playerName);
 
             } else if (gameMode.equals("pvp")) {
                 messageOfGameLabel.setText("Player 1 place your ships...");
