@@ -15,10 +15,12 @@ public class OceanValidator {
             int x = ship.getXOfSquare(i);
             int y = ship.getYOfSquare(i);
 
-            if (vertical) {
-                valid = checkVerticalSquare(ocean, x, y, i);
-            } else {
-                valid = checkHorizontalSquare(ocean, x, y, i);
+            if (valid) {
+                if (vertical) {
+                    valid = checkVerticalSquare(ocean, x, y, i);
+                } else {
+                    valid = checkHorizontalSquare(ocean, x, y, i);
+                }
             }
         }
 
@@ -26,13 +28,13 @@ public class OceanValidator {
 
     }
 
-    private static boolean checkVerticalSquare(String[][] ocean, int x, int y, int part) {
+    private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
         /**
          * Function checks if 'ship' oriented vertically 
          * is placed accordingly to game rules
          * (isn't touching any other ship)
          * 
-         * Every part checks Squares above and below
+         * Every part checks Squares above, below and on its x,y
          * Fist and Last part also checks Squares on sides
          * 
          * First part checks also if entire ship fits on Ocean (board)
@@ -43,6 +45,10 @@ public class OceanValidator {
         }
 
         if (y - 1 >= 0 && ocean[x][y - 1].equals("S")) {
+            return false;
+        }
+
+        if (ocean[x][y].equals("S")) {
             return false;
         }
         
@@ -87,13 +93,13 @@ public class OceanValidator {
         return true;
     }
 
-    private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
+    private static boolean checkVerticalSquare(String[][] ocean, int x, int y, int part) {
         /**
          * Function checks if 'ship' oriented horizontally 
          * is placed accordingly to game rules
          * (isn't touching any other ship)
          * 
-         * Every part checks Squares on sides (left & right)
+         * Every part checks Squares on sides (left & right) and on its x,y
          * Fist and Last part also checks Squares above and below
          * 
          * First part checks also if entire ship fits on Ocean (board)
@@ -104,6 +110,10 @@ public class OceanValidator {
         }
 
         if (x - 1 >= 0 && ocean[x - 1][y].equals("S")) {
+            return false;
+        }
+
+        if (ocean[x][y].equals("S")) {
             return false;
         }
 
