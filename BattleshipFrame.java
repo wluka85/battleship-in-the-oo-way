@@ -18,6 +18,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private String gameMode = "";
     private HandleGame handleGame;
     private JButton nextButton;
+    private Ocean ocean1, ocean2;
+    private int levelFirstPlayer, levelSecondPlayer;
 
     public BattleshipFrame() {
         addMenuBar();
@@ -121,8 +123,36 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         }
 
         if (gameMode.equals("pvAI")) {
-            messageOfGameLabel.setText("Type your choice on ocean...");
+            levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
+            ocean1 = getGeneratedOcean();
+            handleGame = new HandleGame (ocean1, levelFirstPlayer);
+
         }
+    }
+
+
+    private Ocean getGeneratedOcean() {
+        ShipsPositioningDialog shipsPositioning = new ShipsPositioningDialog(this);
+        Ocean ocean = new Ocean();
+        ocean = shipsPositioning.getOcean();
+        messageOfGameLabel.setText("Type your ships on ocean...");
+        return ocean;
+    }
+
+
+    private int getInputOfLevelFromUser(String text) {
+        String levelStr = "";
+        int level = 0;
+        while (level < 1) {
+            levelStr = JOptionPane.showInputDialog(null, text);
+            try {
+                level = Integer.parseInt(levelStr);
+            } catch (NumberFormatException ne) {
+
+            }
+            if (level > 4) level = 4;
+        }
+        return level;
     }
 
 
