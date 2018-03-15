@@ -12,4 +12,16 @@ public class Player {
     public String[][] getEnemyBoard() {
         return enemyOcean;
     }
+
+    public void updateEnemyOcean(int x, int y, String shootResult) {
+        switch (shootResult) {
+        case "Hit":
+        case "Hit and sunk":
+            enemyOcean[x][y] = "X";
+            break;
+        case "Miss":
+            enemyOcean[x][y] = "O";
+            break;
+        }
+    }
 }
