@@ -30,16 +30,16 @@ public class OceanValidator {
 
     private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
         /**
-         * Function checks if 'ship' oriented vertically 
+         * Function checks if 'ship' oriented vertically
          * is placed accordingly to game rules
          * (isn't touching any other ship)
-         * 
+         *
          * Every part checks Squares above, below and on its x,y
          * Fist and Last part also checks Squares on sides
-         * 
+         *
          * First part checks also if entire ship fits on Ocean (board)
          */
-                
+
         if (y + 1 < OCEAN_SIZE && ocean[x][y + 1].equals("S")) {
             return false;
         }
@@ -51,8 +51,8 @@ public class OceanValidator {
         if (ocean[x][y].equals("S")) {
             return false;
         }
-        
-        if (part == 0 && x-1 >= 0) {
+
+        if (part == 0 && x - 1 >= 0) {
             // Check if ship is not too long for this location:
             if (x + lastPart >= OCEAN_SIZE) {
                 return false;
@@ -95,13 +95,13 @@ public class OceanValidator {
 
     private static boolean checkVerticalSquare(String[][] ocean, int x, int y, int part) {
         /**
-         * Function checks if 'ship' oriented horizontally 
+         * Function checks if 'ship' oriented horizontally
          * is placed accordingly to game rules
          * (isn't touching any other ship)
-         * 
+         *
          * Every part checks Squares on sides (left & right) and on its x,y
          * Fist and Last part also checks Squares above and below
-         * 
+         *
          * First part checks also if entire ship fits on Ocean (board)
          */
 
@@ -139,7 +139,7 @@ public class OceanValidator {
             }
         }
 
-        if (part == lastPart && y + 1 <  OCEAN_SIZE) {
+        if (part == lastPart && y + 1 < OCEAN_SIZE) {
             // If there is Ship on bottom-left:
             if (x - 1 >= 0 && ocean[x - 1][y + 1].equals("S")) {
                 return false;
