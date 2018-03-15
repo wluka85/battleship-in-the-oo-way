@@ -20,6 +20,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JButton nextButton;
     private Ocean ocean1, ocean2;
     private int levelFirstPlayer, levelSecondPlayer;
+    private int phaseGame;
 
     public BattleshipFrame() {
         addMenuBar();
@@ -129,6 +130,12 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             ocean1 = getGeneratedOcean();
             handleGame = new HandleGame (ocean1, levelFirstPlayer);
 
+        } else if (gameMode.equals("pvp")) {
+            messageOfGameLabel.setText("Player 1 place your ships...");
+            ocean1 = getGeneratedOcean();
+            messageOfGameLabel.setText("Player 2 place your ships...");
+            ocean2 = getGeneratedOcean();
+            phaseGame = 1;
         }
     }
 
