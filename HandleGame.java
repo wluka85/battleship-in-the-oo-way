@@ -171,19 +171,19 @@ public class HandleGame {
          * (Used in PvP and AIvAI only)
          */
         Ocean player1Ocean = oceans.get(0);
-        boolean player1Won = checkOcean(player1Ocean);
+        boolean player1Lost= checkOcean(player1Ocean);
 
         if (players.get(0).getClass().getName().equals("AI")) {
-            if (player1Won) {
-                return "AI 1 won!";
-            } else {
+            if (player1Lost) {
                 return "AI 2 won!";
+            } else {
+                return "AI 1 won!";
             }
         } else {
-            if (player1Won) {
-                return "Player 1 won!";
-            } else {
+            if (player1Lost) {
                 return "Player 2 won!";
+            } else {
+                return "Player 1 won!";
             }
         }
     }
