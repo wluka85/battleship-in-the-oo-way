@@ -41,6 +41,7 @@ public class ChooseGameModeDialog extends JDialog {
         buttonPanel.add(pvpButton);
         buttonPanel.add(aivAIButton);
         add(buttonPanel, BorderLayout.CENTER);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setSize(getPrefferedSize());
         setVisible(true);
     }
