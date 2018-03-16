@@ -24,13 +24,17 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     public BattleshipFrame() {
         addMenuBar();
         setLayout(new BorderLayout());
+        addControlPanel();
+        addHudPanel();
+        add(hudPanel, BorderLayout.CENTER);
+        setSize(getPrefferedSize());
+    }
+
+    private void addHudPanel() {
         hudPanel = new JPanel();
         hudPanel.setLayout(new GridLayout(1, 2, 20, 10));
         hudPanel.add(addOceanPanel(squaresLabelMy));
         hudPanel.add(addOceanPanel(squaresLabelEnemy));
-        addControlPanel();
-        add(hudPanel, BorderLayout.CENTER);
-        setSize(getPrefferedSize());
     }
 
     private void addMenuBar() {
@@ -44,6 +48,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         menuGame.add(menuItemHighScore);
         menuGame.add(menuItemExit);
         menuBar.add(menuGame);
+
         menuItemHighScore.addActionListener(this);
 
         menuItemNewGame.addActionListener(this);
@@ -66,26 +71,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             public void actionPerformed(ActionEvent e) {
                 if (gameMode.equals("aivAI") && !handleGame.checkIfGameOver()) {
                     simulationAIvAI();
-                } else if (gameMode.equals("pvp") && phaseGame == 1) {
-                    phaseGame += 1;
-                    messageOfGameLabel.setText("Player 1 take shot...");
-                    displayOceans(0);
-
-                } else if (gameMode.equals("pvp") && phaseGame == 3) {
-                    phaseGame += 1;
-                    clearOceans();
-                    messageOfGameLabel.setText("Player 2 your turn press next...");
-                } else if (gameMode.equals("pvp") && phaseGame == 4) {
-                    phaseGame += 1;
-                    messageOfGameLabel.setText("Player 2 take shot...");
-                    displayOceans(1);
-                } else if (gameMode.equals("pvp") && phaseGame == 6) {
-                    phaseGame += 1;
-                    messageOfGameLabel.setText("Player 1 your turn press next...");
-                    clearOceans();
-                    phaseGame = 1;
-                } else if (handleGame.checkIfGameOver()) {
-                    JOptionPane.showMessageDialog(null, handleGame.getGameResult());
+                } else {
+                    takeATurnPvP();
                 }
             }
         });
@@ -129,19 +116,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
             String[][] oceanEnemy = handleGame.getOceanBoard(0, 0);
             displayOcean(oceanEnemy, squaresLabelEnemy);
         }
-         else if (gameMode.equals("pvp") && !handleGame.checkIfGameOver()) {
-            if (phaseGame == 2) {
-                handleGame.takeATurn(0, position[0], position[1]);
-                displayOceans(0);
-                phaseGame++;
-                messageOfGameLabel.setText("Press next...");
-
-            } else if (phaseGame == 5) {
-                handleGame.takeATurn(1, position[0], position[1]);
-                displayOceans(1);
-                messageOfGameLabel.setText("Press next...");
-                phaseGame++;
-            }
+         else {
+             takeATurnPvP(position[0], position[1]);
         }
         if (handleGame.checkIfGameOver()) {
             JOptionPane.showMessageDialog(null, handleGame.getGameResult());
@@ -152,6 +128,46 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         }
     }
 
+    private void takeATurnPvP() {
+        if (gameMode.equals("pvp") && phaseGame == 1) {
+            phaseGame += 1;
+            messageOfGameLabel.setText("Player 1 take shot...");
+            displayOceans(0);
+
+        } else if (gameMode.equals("pvp") && phaseGame == 3) {
+            phaseGame += 1;
+            clearOceans();
+            messageOfGameLabel.setText("Player 2 press next...");
+        } else if (gameMode.equals("pvp") && phaseGame == 4) {
+            phaseGame += 1;
+            messageOfGameLabel.setText("Player 2 take shot...");
+            displayOceans(1);
+        } else if (gameMode.equals("pvp") && phaseGame == 6) {
+            phaseGame += 1;
+            messageOfGameLabel.setText("Player 1 press next...");
+            clearOceans();
+            phaseGame = 1;
+        } else if (handleGame.checkIfGameOver()) {
+            JOptionPane.showMessageDialog(null, handleGame.getGameResult());
+        }
+    }
+
+    private void takeATurnPvP(int x, int y) {
+        if (gameMode.equals("pvp") && !handleGame.checkIfGameOver()) {
+           if (phaseGame == 2) {
+               handleGame.takeATurn(0, x, y);
+               displayOceans(0);
+               phaseGame++;
+               messageOfGameLabel.setText("Press next...");
+
+           } else if (phaseGame == 5) {
+               handleGame.takeATurn(1, x, y);
+               displayOceans(1);
+               messageOfGameLabel.setText("Press next...");
+               phaseGame++;
+           }
+       }
+    }
 
     private void displayOceans(int playerIndex) {
         String[][] oceanPl = handleGame.getOceanBoard(playerIndex, 1);
@@ -166,33 +182,51 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         if (source == menuItemHighScore) {
             handleGame = new HandleGame(1, 1);
             HighScoreDialog highScoreDialog = new HighScoreDialog(this, handleGame.getHighscores());
+
         } else if (source == menuItemNewGame){
-            ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
-            gameMode = chooseGameMode.getGameMode();
-
-            if (gameMode.equals("aivAI")) {
-                levelFirstPlayer = getInputOfLevelFromUser("Choose level first computer: ");
-                levelSecondPlayer = getInputOfLevelFromUser("Choose level second computer: ");
-                handleGame = new HandleGame(levelFirstPlayer, levelSecondPlayer);
-                messageOfGameLabel.setText("Press next...");
-
-            } else if (gameMode.equals("pvAI")) {
-                String playerName = JOptionPane.showInputDialog(null, "What is your name?");
-                levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
-                ocean1 = getGeneratedOcean();
-                handleGame = new HandleGame(ocean1, levelFirstPlayer);
-                handleGame.setNameOfPlayer(playerName);
-
-            } else if (gameMode.equals("pvp")) {
-                messageOfGameLabel.setText("Player 1 place your ships...");
-                ocean1 = getGeneratedOcean();
-                messageOfGameLabel.setText("Player 2 place your ships...");
-                ocean2 = getGeneratedOcean();
-                handleGame = new HandleGame (ocean1, ocean2);
-                phaseGame = 1;
-                messageOfGameLabel.setText("Player 1 your turn, press next...");
-            }
+            createNewGame();
         }
+    }
+
+    private void createNewGame() {
+        clearOceans();
+        ChooseGameModeDialog chooseGameMode = new ChooseGameModeDialog(this);
+        gameMode = chooseGameMode.getGameMode();
+
+        if (gameMode.equals("aivAI")) {
+            createNewGameOfAivAImode();
+
+        } else if (gameMode.equals("pvAI")) {
+            createNewGameOfPvAImode();
+
+        } else if (gameMode.equals("pvp")) {
+            createNewGameOfPvPmode();
+        }
+    }
+
+    private void createNewGameOfAivAImode() {
+        levelFirstPlayer = getInputOfLevelFromUser("Choose level first computer: ");
+        levelSecondPlayer = getInputOfLevelFromUser("Choose level second computer: ");
+        handleGame = new HandleGame(levelFirstPlayer, levelSecondPlayer);
+        messageOfGameLabel.setText("Press next...");
+    }
+
+    private void createNewGameOfPvAImode() {
+        String playerName = JOptionPane.showInputDialog(null, "What is your name?");
+        levelFirstPlayer = getInputOfLevelFromUser("Choose level: ");
+        ocean1 = getGeneratedOcean();
+        handleGame = new HandleGame(ocean1, levelFirstPlayer);
+        handleGame.setNameOfPlayer(playerName);
+    }
+
+    private void createNewGameOfPvPmode() {
+        messageOfGameLabel.setText("Player 1 place your ships...");
+        ocean1 = getGeneratedOcean();
+        messageOfGameLabel.setText("Player 2 place your ships...");
+        ocean2 = getGeneratedOcean();
+        handleGame = new HandleGame (ocean1, ocean2);
+        phaseGame = 1;
+        messageOfGameLabel.setText("Player 1 your turn, press next...");
     }
 
     private Ocean getGeneratedOcean() {
