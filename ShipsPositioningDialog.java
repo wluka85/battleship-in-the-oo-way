@@ -25,6 +25,7 @@ public class ShipsPositioningDialog extends JDialog implements MouseListener {
         addOceanPanel(squaresLabelMy);
         addOptionsOfShips();
         setSize(getPrefferedSize());
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setVisible(true);
 
