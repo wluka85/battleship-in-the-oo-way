@@ -18,14 +18,13 @@ public abstract class AI {
         addShipsToOcean();
     }
 
+    public String[][] getEnemyBoard() {
+        return enemyBoard;
+    }
+
     public abstract void takeAShoot(Ocean enemyOcean);
 
     private void fillEnemyBoard() {
-        /*
-          Fills String[][] enemyBoard
-          On start enemyBoard is filled
-          with empty fields (whitespaces)
-         */
         for (int x = 0; x < Ocean.SIZE; x++) {
             for (int y = 0; y < Ocean.SIZE; y++) {
                 enemyBoard[x][y] = " ";
@@ -34,27 +33,10 @@ public abstract class AI {
     }
 
     private void addShipsToOcean() {
-        addCarrier();
-        addBattleship();
-        addCruiser();
-        addCruiser();
-        addDestroyer();
-
-    }
-
-    private void addCarrier() {
         addShipOfLength(5);
-    }
-
-    private void addBattleship() {
         addShipOfLength(4);
-    }
-
-    private void addCruiser() {
         addShipOfLength(3);
-    }
-
-    private void addDestroyer() {
+        addShipOfLength(3);
         addShipOfLength(2);
     }
 
@@ -72,7 +54,7 @@ public abstract class AI {
         ocean.addShip(ship);
     }
 
-    protected Point getRandomPointWithWater() {
+    private Point getRandomPointWithWater() {
         int x, y;
         boolean isWater;
         do {
@@ -87,11 +69,6 @@ public abstract class AI {
     }
 
     protected void attackDamagedShip(Ocean enemyOcean) {
-        /**
-         * Searches for damaged ship part
-         * and attacks squares adjacent to it
-         *
-         */
         for (int x = 0; x < Ocean.SIZE; x++) {
             for (int y = 0; y < Ocean.SIZE; y++) {
                 if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)) {
@@ -102,13 +79,7 @@ public abstract class AI {
         }
     }
 
-    protected void handleHit(int x, int y) {
-        /**
-         * Method marks enemyBoard on hit.
-         *
-         *  'X' - place where ship was
-         *  'O' - squares placed diagonally to where ship was
-         */
+    private void handleHit(int x, int y) {
 
         enemyBoard[x][y] = "X";
 
@@ -129,11 +100,7 @@ public abstract class AI {
         }
     }
 
-    protected void handleHitAndSunk(int x, int y) {
-        /**
-         * Method marks all squares around destroyed ship
-         *
-         */
+    private void handleHitAndSunk(int x, int y) {
         handleHit(x, y);
         markTop(x, y);
         markDown(x, y);
@@ -142,27 +109,17 @@ public abstract class AI {
     }
 
     private void markTop(int x, int y) {
-        /**
-         * Method marks unmarked square above shot square;
-         */
-        for (int i = y; i >= 0; i--) {
-            if (enemyBoard[x][i].equals("X")) {
-                continue;
-            } else {
-                enemyBoard[x][i] = "O";
+        for (; y >= 0; y--) {
+            if (!enemyBoard[x][y].equals("X")) {
+                enemyBoard[x][y] = "O";
                 break;
             }
         }
     }
 
     private void markDown(int x, int y) {
-        /**
-         * Method marks unmarked square under shot square;
-         */
         for (int i = y; i < Ocean.SIZE; i++) {
-            if (enemyBoard[x][i].equals("X")) {
-                continue;
-            } else {
+            if (!enemyBoard[x][i].equals("X")) {
                 enemyBoard[x][i] = "O";
                 break;
             }
@@ -170,13 +127,8 @@ public abstract class AI {
     }
 
     private void markLeft(int x, int y) {
-        /**
-         * Method marks unmarked square on left of shot square;
-         */
         for (int i = x; i >= 0; i--) {
-            if (enemyBoard[i][y].equals("X")) {
-                continue;
-            } else {
+            if (!enemyBoard[i][y].equals("X")) {
                 enemyBoard[i][y] = "O";
                 break;
             }
@@ -184,13 +136,8 @@ public abstract class AI {
     }
 
     private void markRight(int x, int y) {
-        /**
-         * Method marks unmarked square on right of shot square;
-         */
         for (int i = x; i < Ocean.SIZE; i++) {
-            if (enemyBoard[i][y].equals("X")) {
-                continue;
-            } else {
+            if (!enemyBoard[i][y].equals("X")) {
                 enemyBoard[i][y] = "O";
                 break;
             }
@@ -198,96 +145,55 @@ public abstract class AI {
     }
 
     private boolean hasUncheckedAdjacent(int x, int y) {
-        /**
-         * Method checks if there are
-         * unmarked squares adjacent to
-         * square on x, y coordinates
-         *
-         */
         return (uncheckedLeft(x, y) || uncheckedRight(x, y) || uncheckedTop(x, y) || uncheckedBottom(x, y));
     }
 
     private boolean uncheckedLeft(int x, int y) {
-        /**
-         * Method checks if there is
-         * unmarked square on left of
-         * square on x, y coordinates
-         *
-         */
         return (x - 1 >= 0 && enemyBoard[x - 1][y].equals(" "));
     }
 
     private boolean uncheckedRight(int x, int y) {
-        /**
-         * Method checks if there is
-         * unmarked square on right of
-         * square on x, y coordinates
-         *
-         */
         return (x + 1 < Ocean.SIZE && enemyBoard[x + 1][y].equals(" "));
     }
 
     private boolean uncheckedTop(int x, int y) {
-        /**
-         * Method checks if there is
-         * unmarked square above
-         * square on x, y coordinates
-         *
-         */
         return (y - 1 >= 0 && enemyBoard[x][y - 1].equals(" "));
     }
 
     private boolean uncheckedBottom(int x, int y) {
-        /**
-         * Method checks if there is
-         * unmarked square below
-         * square on x, y coordinates
-         *
-         */
         return (y + 1 < Ocean.SIZE && enemyBoard[x][y + 1].equals(" "));
     }
 
     protected void attackAdjacent(int x, int y, Ocean enemyOcean) {
-        int x2, y2;
-        String shootResult;
+        int targetX = x;
+        int targetY = y;
         if (uncheckedLeft(x, y)) {
-            shootResult = enemyOcean.takeShot(x - 1, y);
-            x2 = x - 1;
-            y2 = y;
+            targetX = x - 1;
         } else if (uncheckedRight(x, y)) {
-            shootResult = enemyOcean.takeShot(x + 1, y);
-            x2 = x + 1;
-            y2 = y;
+            targetX = x + 1;
         } else if (uncheckedTop(x, y)) {
-            shootResult = enemyOcean.takeShot(x, y - 1);
-            x2 = x;
-            y2 = y - 1;
+            targetY = y - 1;
         } else {
-            shootResult = enemyOcean.takeShot(x, y + 1);
-            x2 = x;
-            y2 = y + 1;
+            targetY = y + 1;
         }
+        String shootResult = enemyOcean.takeShot(targetX, targetY);
 
         switch (shootResult) {
             case "Hit":
-                handleHit(x2, y2);
+                handleHit(targetX, targetY);
                 huntMode = true;
                 break;
             case "Hit and sunk":
-                handleHitAndSunk(x2, y2);
+                handleHitAndSunk(targetX, targetY);
                 huntMode = false;
                 break;
             case "Miss":
-                enemyBoard[x2][y2] = "O";
+                enemyBoard[targetX][targetY] = "O";
                 break;
         }
     }
 
     protected int countUncheckedAdjacent(int x, int y) {
-        /**
-         * Methot returns number of unchecked squares
-         * adjacent to square at X, Y coordinates
-         */
         int uncheckedAdjacent = 0;
         if (uncheckedLeft(x, y)) {
             uncheckedAdjacent++;
@@ -303,10 +209,6 @@ public abstract class AI {
         }
 
         return uncheckedAdjacent;
-    }
-
-    public String[][] getEnemyBoard() {
-        return enemyBoard;
     }
 
     protected void standardShot(Ocean enemyOcean) {
