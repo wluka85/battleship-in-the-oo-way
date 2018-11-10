@@ -2,7 +2,7 @@ package com.codecool.controller;
 
 import com.codecool.model.Ocean;
 import com.codecool.players.AI;
-import com.codecool.players.Player;
+import com.codecool.players.HumanPlayer;
 import com.codecool.players.ai.AIFactory;
 
 import java.util.ArrayList;
@@ -28,16 +28,16 @@ public class GameHandler {
 
     private void pvp(Ocean ocean1, Ocean ocean2) {
         oceans.add(ocean1);
-        players.add(new Player(ocean1));
+        players.add(new HumanPlayer(ocean1));
 
         oceans.add(ocean2);
-        players.add(new Player(ocean2));
+        players.add(new HumanPlayer(ocean2));
 
     }
 
     private void pvAI(Ocean ocean, int level) {
         oceans.add(ocean);
-        players.add(new Player(ocean));
+        players.add(new HumanPlayer(ocean));
 
         Ocean secondPlayerOcean = new Ocean();
         oceans.add(secondPlayerOcean);
@@ -81,9 +81,9 @@ public class GameHandler {
         int nextPlayerIndex = getNextPlayerIndex(currentPlayerIndex);
         String result = oceans.get(nextPlayerIndex).takeShot(x, y);
 
-        //TODO refactor Player and AI classes to avoid casting
-        Player currentPlayer = (Player) players.get(currentPlayerIndex);
-        currentPlayer.updateEnemyOcean(x, y, result);
+        //TODO refactor HumanPlayer and AI classes to avoid casting
+        HumanPlayer currentHumanPlayer = (HumanPlayer) players.get(currentPlayerIndex);
+        currentHumanPlayer.updateEnemyOcean(x, y, result);
     }
 
     public void takeATurn(int playerIndex) {
@@ -104,16 +104,16 @@ public class GameHandler {
                 AI currentPlayer = (AI) players.get(playerIndex);
                 return currentPlayer.getEnemyBoard();
             } else {
-                Player currentPlayer = (Player) players.get(playerIndex);
-                return currentPlayer.getEnemyBoard();
+                HumanPlayer currentHumanPlayer = (HumanPlayer) players.get(playerIndex);
+                return currentHumanPlayer.getEnemyBoard();
             }
 
         }
     }
 
     public void setNameOfPlayer(String newName) {
-        Player player = (Player) players.get(0);
-        player.setName(newName);
+        HumanPlayer humanPlayer = (HumanPlayer) players.get(0);
+        humanPlayer.setName(newName);
     }
 
     public String getHighScores() {
@@ -133,9 +133,9 @@ public class GameHandler {
     }
 
     public void savePlayerScore() {
-        Player player = (Player) players.get(0);
-        String playerName = player.getName();
-        int turns = player.getTurns();
+        HumanPlayer humanPlayer = (HumanPlayer) players.get(0);
+        String playerName = humanPlayer.getName();
+        int turns = humanPlayer.getTurns();
         HighScore.addNewScore(playerName, turns);
     }
 }

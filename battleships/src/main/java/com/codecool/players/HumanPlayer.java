@@ -2,14 +2,14 @@ package com.codecool.players;
 
 import com.codecool.model.Ocean;
 
-public class Player {
+public class HumanPlayer {
 
     private String[][] enemyOcean = new String[Ocean.SIZE][Ocean.SIZE];
     public Ocean ocean;
     private int turns = 0;
     private String playerName = "MentorBot";
 
-    public Player(Ocean ocean) {
+    public HumanPlayer(Ocean ocean) {
         this.ocean = ocean;
     }
 
