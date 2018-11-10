@@ -108,7 +108,11 @@ public abstract class AI {
             targetY = y + 1;
         }
         String shootResult = enemyOcean.takeShot(targetX, targetY);
-        huntMode = shootResult.equals("Hit");
+        if (shootResult.equals("Hit")) {
+            huntMode = true;
+        } else if (shootResult.equals("Hit and sunk")) {
+            huntMode = false;
+        }
 
         shotResultHandler.smartUpdateEnemyOcean(targetX, targetY, shootResult);
     }
@@ -138,7 +142,11 @@ public abstract class AI {
         int y = shootPoint.getY();
 
         String shootResult = enemyOcean.takeShot(x, y);
-        huntMode = shootResult.equals("Hit");
+        if (shootResult.equals("Hit")) {
+            huntMode = true;
+        } else if (shootResult.equals("Hit and sunk")) {
+            huntMode = false;
+        }
 
         shotResultHandler.smartUpdateEnemyOcean(x, y, shootResult);
     }

@@ -5,9 +5,9 @@ import com.codecool.players.AI;
 
 public class HardAI extends AI {
 
-
-    public HardAI(Ocean ocean) {
+    HardAI(Ocean ocean) {
         super(ocean);
+        this.huntMode = false;
     }
 
     @Override

@@ -24,7 +24,6 @@ public class HumanPlayer {
 
     public void setName(String newName) {
         this.playerName = newName;
-        ;
     }
 
     public String getName() {
