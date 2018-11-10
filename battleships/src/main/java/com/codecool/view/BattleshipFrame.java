@@ -15,8 +15,8 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
     private JMenuBar menuBar;
     private JMenu menuGame;
     private JMenuItem menuItemNewGame, menuItemHighScore, menuItemExit;
-    private JLabel[][] squaresLabelMy = new JLabel[10][10];
-    private JLabel[][] squaresLabelEnemy = new JLabel[10][10];
+    private JLabel[][] squaresLabelMy = new JLabel[Ocean.SIZE][Ocean.SIZE];
+    private JLabel[][] squaresLabelEnemy = new JLabel[Ocean.SIZE][Ocean.SIZE];
     private JLabel messageOfGameLabel;
     private JPanel oceanPanel, hudPanel, controlPanel;
     private String gameMode = "";

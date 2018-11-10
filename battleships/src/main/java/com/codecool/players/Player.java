@@ -4,7 +4,7 @@ import com.codecool.model.Ocean;
 
 public class Player {
 
-    private String[][] enemyOcean = new String[10][10];
+    private String[][] enemyOcean = new String[Ocean.SIZE][Ocean.SIZE];
     public Ocean ocean;
     private int turns = 0;
     private String playerName = "MentorBot";

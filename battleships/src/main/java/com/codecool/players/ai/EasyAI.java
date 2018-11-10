@@ -17,8 +17,8 @@ public class EasyAI extends AI {
         boolean isWater;
         Random generator = new Random();
         do {
-            x = generator.nextInt(OCEAN_SIZE);
-            y = generator.nextInt(OCEAN_SIZE);
+            x = generator.nextInt(Ocean.SIZE);
+            y = generator.nextInt(Ocean.SIZE);
 
             isWater = enemyBoard[x][y].equals(" ");
 

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ocean {
-    private String[][] ocean = new String[10][10];
+    public static int SIZE = 20;
+    private String[][] ocean = new String[SIZE][SIZE];
     private List<Ship> ships = new ArrayList<>();
 
     public Ocean() {

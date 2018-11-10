@@ -46,8 +46,8 @@ public class MasterAI extends AI {
 
         int uncheckedAdjacent;
 
-        for (int x = 0; x < OCEAN_SIZE; x++) {
-            for (int y = 0; y < OCEAN_SIZE; y++) {
+        for (int x = 0; x < Ocean.SIZE; x++) {
+            for (int y = 0; y < Ocean.SIZE; y++) {
                 if (enemyBoard[x][y].equals(" ")) {
                     uncheckedAdjacent = countUncheckedAdjacent(x, y);
                     if (uncheckedAdjacent == 1) {

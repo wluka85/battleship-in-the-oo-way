@@ -8,9 +8,7 @@ import com.codecool.model.Ship;
 import java.util.Random;
 
 public abstract class AI {
-
-    protected static final int OCEAN_SIZE = 10;
-    protected String[][] enemyBoard = new String[10][10];
+    protected String[][] enemyBoard = new String[Ocean.SIZE][Ocean.SIZE];
     protected Ocean ocean;
     protected boolean huntMode;
 
@@ -28,8 +26,8 @@ public abstract class AI {
           On start enemyBoard is filled
           with empty fields (whitespaces)
          */
-        for (int x = 0; x < OCEAN_SIZE; x++) {
-            for (int y = 0; y < OCEAN_SIZE; y++) {
+        for (int x = 0; x < Ocean.SIZE; x++) {
+            for (int y = 0; y < Ocean.SIZE; y++) {
                 enemyBoard[x][y] = " ";
             }
         }
@@ -65,8 +63,8 @@ public abstract class AI {
         boolean validShipLocation;
         do {
             Random generator = new Random();
-            int x = generator.nextInt(OCEAN_SIZE);
-            int y = generator.nextInt(OCEAN_SIZE);
+            int x = generator.nextInt(Ocean.SIZE);
+            int y = generator.nextInt(Ocean.SIZE);
             boolean vertical = generator.nextBoolean();
             ship = new Ship(x, y, length, vertical);
             validShipLocation = OceanValidator.validateOcean(ocean.getOceanBoard(), ship);
@@ -79,8 +77,8 @@ public abstract class AI {
         boolean isWater;
         do {
             Random generator = new Random();
-            x = generator.nextInt(OCEAN_SIZE);
-            y = generator.nextInt(OCEAN_SIZE);
+            x = generator.nextInt(Ocean.SIZE);
+            y = generator.nextInt(Ocean.SIZE);
 
             isWater = enemyBoard[x][y].equals(" ") && countUncheckedAdjacent(x, y) != 0;
 
@@ -94,8 +92,8 @@ public abstract class AI {
          * and attacks squares adjacent to it
          *
          */
-        for (int x = 0; x < OCEAN_SIZE; x++) {
-            for (int y = 0; y < OCEAN_SIZE; y++) {
+        for (int x = 0; x < Ocean.SIZE; x++) {
+            for (int y = 0; y < Ocean.SIZE; y++) {
                 if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)) {
                     attackAdjacent(x, y, enemyOcean);
                     return;
@@ -118,15 +116,15 @@ public abstract class AI {
             enemyBoard[x - 1][y - 1] = "O";
         }
 
-        if (x - 1 >= 0 && y + 1 < OCEAN_SIZE) {
+        if (x - 1 >= 0 && y + 1 < Ocean.SIZE) {
             enemyBoard[x - 1][y + 1] = "O";
         }
 
-        if (x + 1 < OCEAN_SIZE && y - 1 >= 0) {
+        if (x + 1 < Ocean.SIZE && y - 1 >= 0) {
             enemyBoard[x + 1][y - 1] = "O";
         }
 
-        if (x + 1 < OCEAN_SIZE && y + 1 < OCEAN_SIZE) {
+        if (x + 1 < Ocean.SIZE && y + 1 < Ocean.SIZE) {
             enemyBoard[x + 1][y + 1] = "O";
         }
     }
@@ -161,7 +159,7 @@ public abstract class AI {
         /**
          * Method marks unmarked square under shot square;
          */
-        for (int i = y; i < OCEAN_SIZE; i++) {
+        for (int i = y; i < Ocean.SIZE; i++) {
             if (enemyBoard[x][i].equals("X")) {
                 continue;
             } else {
@@ -189,7 +187,7 @@ public abstract class AI {
         /**
          * Method marks unmarked square on right of shot square;
          */
-        for (int i = x; i < OCEAN_SIZE; i++) {
+        for (int i = x; i < Ocean.SIZE; i++) {
             if (enemyBoard[i][y].equals("X")) {
                 continue;
             } else {
@@ -226,7 +224,7 @@ public abstract class AI {
          * square on x, y coordinates
          *
          */
-        return (x + 1 < OCEAN_SIZE && enemyBoard[x + 1][y].equals(" "));
+        return (x + 1 < Ocean.SIZE && enemyBoard[x + 1][y].equals(" "));
     }
 
     private boolean uncheckedTop(int x, int y) {
@@ -246,7 +244,7 @@ public abstract class AI {
          * square on x, y coordinates
          *
          */
-        return (y + 1 < OCEAN_SIZE && enemyBoard[x][y + 1].equals(" "));
+        return (y + 1 < Ocean.SIZE && enemyBoard[x][y + 1].equals(" "));
     }
 
     protected void attackAdjacent(int x, int y, Ocean enemyOcean) {
