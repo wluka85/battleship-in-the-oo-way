@@ -4,18 +4,21 @@ import com.codecool.oceanManagers.OceanValidator;
 import com.codecool.model.Ocean;
 import com.codecool.model.Point;
 import com.codecool.model.Ship;
+import com.codecool.oceanManagers.ShotResultHandler;
 
 import java.util.Random;
 
 public abstract class AI {
     protected String[][] enemyBoard = new String[Ocean.SIZE][Ocean.SIZE];
     protected Ocean ocean;
+    private ShotResultHandler shotResultHandler;
     protected boolean huntMode;
 
     public AI(Ocean ocean) {
         this.ocean = ocean;
         fillEnemyBoard();
         addShipsToOcean();
+        shotResultHandler = new ShotResultHandler(enemyBoard);
     }
 
     public String[][] getEnemyBoard() {
@@ -79,71 +82,6 @@ public abstract class AI {
         }
     }
 
-    private void handleHit(int x, int y) {
-
-        enemyBoard[x][y] = "X";
-
-        if (x - 1 >= 0 && y - 1 >= 0) {
-            enemyBoard[x - 1][y - 1] = "O";
-        }
-
-        if (x - 1 >= 0 && y + 1 < Ocean.SIZE) {
-            enemyBoard[x - 1][y + 1] = "O";
-        }
-
-        if (x + 1 < Ocean.SIZE && y - 1 >= 0) {
-            enemyBoard[x + 1][y - 1] = "O";
-        }
-
-        if (x + 1 < Ocean.SIZE && y + 1 < Ocean.SIZE) {
-            enemyBoard[x + 1][y + 1] = "O";
-        }
-    }
-
-    private void handleHitAndSunk(int x, int y) {
-        handleHit(x, y);
-        markTop(x, y);
-        markDown(x, y);
-        markLeft(x, y);
-        markRight(x, y);
-    }
-
-    private void markTop(int x, int y) {
-        for (; y >= 0; y--) {
-            if (!enemyBoard[x][y].equals("X")) {
-                enemyBoard[x][y] = "O";
-                break;
-            }
-        }
-    }
-
-    private void markDown(int x, int y) {
-        for (int i = y; i < Ocean.SIZE; i++) {
-            if (!enemyBoard[x][i].equals("X")) {
-                enemyBoard[x][i] = "O";
-                break;
-            }
-        }
-    }
-
-    private void markLeft(int x, int y) {
-        for (int i = x; i >= 0; i--) {
-            if (!enemyBoard[i][y].equals("X")) {
-                enemyBoard[i][y] = "O";
-                break;
-            }
-        }
-    }
-
-    private void markRight(int x, int y) {
-        for (int i = x; i < Ocean.SIZE; i++) {
-            if (!enemyBoard[i][y].equals("X")) {
-                enemyBoard[i][y] = "O";
-                break;
-            }
-        }
-    }
-
     private boolean hasUncheckedAdjacent(int x, int y) {
         return (uncheckedLeft(x, y) || uncheckedRight(x, y) || uncheckedTop(x, y) || uncheckedBottom(x, y));
     }
@@ -177,20 +115,9 @@ public abstract class AI {
             targetY = y + 1;
         }
         String shootResult = enemyOcean.takeShot(targetX, targetY);
+        huntMode = shootResult.equals("Hit");
 
-        switch (shootResult) {
-            case "Hit":
-                handleHit(targetX, targetY);
-                huntMode = true;
-                break;
-            case "Hit and sunk":
-                handleHitAndSunk(targetX, targetY);
-                huntMode = false;
-                break;
-            case "Miss":
-                enemyBoard[targetX][targetY] = "O";
-                break;
-        }
+        shotResultHandler.smartUpdateEnemyOcean(targetX, targetY, shootResult);
     }
 
     protected int countUncheckedAdjacent(int x, int y) {
@@ -218,18 +145,8 @@ public abstract class AI {
         int y = shootPoint.getY();
 
         String shootResult = enemyOcean.takeShot(x, y);
+        huntMode = shootResult.equals("Hit");
 
-        switch (shootResult) {
-            case "Hit":
-                handleHit(x, y);
-                huntMode = true;
-                break;
-            case "Hit and sunk":
-                handleHitAndSunk(x, y);
-                break;
-            case "Miss":
-                enemyBoard[x][y] = "O";
-                break;
-        }
+        shotResultHandler.smartUpdateEnemyOcean(x, y, shootResult);
     }
 }
