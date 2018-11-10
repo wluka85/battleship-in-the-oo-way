@@ -1,3 +1,6 @@
+package com.codecool.players;
+
+import com.codecool.model.Ocean;
 
 public class Player {
 

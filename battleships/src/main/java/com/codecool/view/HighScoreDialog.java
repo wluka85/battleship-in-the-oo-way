@@ -1,5 +1,7 @@
-import java.awt.*;
+package com.codecool.view;
+
 import javax.swing.*;
+import java.awt.*;
 
 
 public class HighScoreDialog extends JDialog {
@@ -8,7 +10,6 @@ public class HighScoreDialog extends JDialog {
     private static final int DEFAULT_WIDTH = 500;
     private static final int DEFAULT_HEIGHT = 500;
     private JTextArea highScoreTextArea;
-
 
 
     public HighScoreDialog(JFrame owner, String highScore) {

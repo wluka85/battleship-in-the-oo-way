@@ -1,6 +1,9 @@
-import java.awt.*;
+package com.codecool.view;
+
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ChooseGameModeDialog extends JDialog {
     private static final int DEFAULT_WIDTH = 180;

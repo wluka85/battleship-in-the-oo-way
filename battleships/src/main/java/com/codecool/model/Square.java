@@ -1,3 +1,5 @@
+package com.codecool.model;
+
 /**
  * Square class module
  * 

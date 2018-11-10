@@ -1,3 +1,9 @@
+package com.codecool.view;
+
+import com.codecool.controller.OceanValidator;
+import com.codecool.model.Ocean;
+import com.codecool.model.Ship;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;

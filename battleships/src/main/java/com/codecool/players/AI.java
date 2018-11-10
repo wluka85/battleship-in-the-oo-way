@@ -1,3 +1,9 @@
+package com.codecool.players;
+
+import com.codecool.controller.OceanValidator;
+import com.codecool.model.Ocean;
+import com.codecool.model.Ship;
+
 import java.util.Random;
 
 public class AI {

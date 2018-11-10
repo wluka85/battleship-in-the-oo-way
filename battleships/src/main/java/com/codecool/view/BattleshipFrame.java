@@ -1,3 +1,8 @@
+package com.codecool.view;
+
+import com.codecool.controller.HandleGame;
+import com.codecool.model.Ocean;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;

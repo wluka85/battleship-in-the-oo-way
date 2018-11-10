@@ -1,5 +1,9 @@
-import java.util.List;
+package com.codecool.model;
+
+import com.codecool.controller.OceanValidator;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ocean {
     private String[][] ocean = new String[10][10];
@@ -46,7 +50,7 @@ public class Ocean {
          * Method updates ocean after shot.
          * If 'Ship' placed on 'ocean' was hit, it is beeing
          * replaced with "X", else with "O"
-         * 
+         *
          * returns String representing result of shot
          */
         if (ocean[x][y].equals("S")) {

@@ -1,3 +1,9 @@
+package com.codecool.controller;
+
+import com.codecool.model.Ocean;
+import com.codecool.players.AI;
+import com.codecool.players.Player;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Object;

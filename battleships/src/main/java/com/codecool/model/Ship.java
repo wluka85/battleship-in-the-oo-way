@@ -1,23 +1,25 @@
-import java.util.List;
+package com.codecool.model;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ship {
     /**
      * 'shipParts'
      * - list of Square objects which are part of ship (on board)
-     * 
+     * <p>
      * 'x'
      * - 'x' coordinate of first ships square on board
-     * 
+     * <p>
      * 'y'
      * - 'y' coordinate of first ships square on board
-     * 
+     * <p>
      * 'shipLength'
      * - length of ship (number of squares)
-     * 
+     * <p>
      * 'vertical'
      * - information if ship is oriented vertically of horizontally
-     * 
+     * <p>
      * 'healthPoints'
      * - number of health points left
      */

@@ -1,3 +1,6 @@
+package com.codecool.controller;
+
+import com.codecool.model.Ship;
 
 public class OceanValidator {
 
@@ -29,15 +32,15 @@ public class OceanValidator {
     }
 
     private static boolean checkHorizontalSquare(String[][] ocean, int x, int y, int part) {
-        /**
-         * Function checks if 'ship' oriented vertically
-         * is placed accordingly to game rules
-         * (isn't touching any other ship)
-         *
-         * Every part checks Squares above, below and on its x,y
-         * Fist and Last part also checks Squares on sides
-         *
-         * First part checks also if entire ship fits on Ocean (board)
+        /*
+          Function checks if 'ship' oriented vertically
+          is placed accordingly to game rules
+          (isn't touching any other ship)
+
+          Every part checks Squares above, below and on its x,y
+          Fist and Last part also checks Squares on sides
+
+          First part checks also if entire ship fits on Ocean (board)
          */
 
         if (y + 1 < OCEAN_SIZE && ocean[x][y + 1].equals("S")) {
@@ -86,23 +89,21 @@ public class OceanValidator {
             }
 
             // If there is Ship below:
-            if (y + 1 < OCEAN_SIZE && ocean[x + 1][y + 1].equals("S")) {
-                return false;
-            }
+            return y + 1 >= OCEAN_SIZE || !ocean[x + 1][y + 1].equals("S");
         }
         return true;
     }
 
     private static boolean checkVerticalSquare(String[][] ocean, int x, int y, int part) {
-        /**
-         * Function checks if 'ship' oriented horizontally
-         * is placed accordingly to game rules
-         * (isn't touching any other ship)
-         *
-         * Every part checks Squares on sides (left & right) and on its x,y
-         * Fist and Last part also checks Squares above and below
-         *
-         * First part checks also if entire ship fits on Ocean (board)
+        /*
+          Function checks if 'ship' oriented horizontally
+          is placed accordingly to game rules
+          (isn't touching any other ship)
+
+          Every part checks Squares on sides (left & right) and on its x,y
+          Fist and Last part also checks Squares above and below
+
+          First part checks also if entire ship fits on Ocean (board)
          */
 
         if (x + 1 < OCEAN_SIZE && ocean[x + 1][y].equals("S")) {
@@ -151,9 +152,7 @@ public class OceanValidator {
             }
 
             // If there is Ship on bottom-right:
-            if (x + 1 < OCEAN_SIZE && ocean[x + 1][y + 1].equals("S")) {
-                return false;
-            }
+            return x + 1 >= OCEAN_SIZE || !ocean[x + 1][y + 1].equals("S");
         }
 
         return true;
