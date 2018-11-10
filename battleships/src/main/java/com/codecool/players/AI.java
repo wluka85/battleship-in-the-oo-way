@@ -1,9 +1,9 @@
 package com.codecool.players;
 
-import com.codecool.oceanManagers.OceanValidator;
 import com.codecool.model.Ocean;
 import com.codecool.model.Point;
 import com.codecool.model.Ship;
+import com.codecool.oceanManagers.OceanValidator;
 import com.codecool.oceanManagers.ShotResultHandler;
 
 import java.util.Random;
@@ -11,7 +11,7 @@ import java.util.Random;
 public abstract class AI {
     protected String[][] enemyBoard = new String[Ocean.SIZE][Ocean.SIZE];
     protected Ocean ocean;
-    private ShotResultHandler shotResultHandler;
+    protected ShotResultHandler shotResultHandler;
     protected boolean huntMode;
 
     public AI(Ocean ocean) {

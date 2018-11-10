@@ -1,7 +1,6 @@
 package com.codecool.players.ai;
 
 import com.codecool.model.Ocean;
-import com.codecool.oceanManagers.ShotResultHandler;
 import com.codecool.players.AI;
 
 import java.util.Random;
@@ -27,6 +26,6 @@ public class EasyAI extends AI {
 
         String shootResult = enemyOcean.takeShot(x, y);
 
-        ShotResultHandler.updateEnemyOcean(x, y, shootResult, enemyBoard);
+        shotResultHandler.updateEnemyOcean(x, y, shootResult);
     }
 }
