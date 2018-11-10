@@ -1,6 +1,6 @@
 package com.codecool.view;
 
-import com.codecool.controller.OceanValidator;
+import com.codecool.oceanManagers.OceanValidator;
 import com.codecool.model.Ocean;
 import com.codecool.model.Ship;
 

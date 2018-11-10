@@ -1,4 +1,4 @@
-package com.codecool.controller;
+package com.codecool.oceanManagers;
 
 import com.codecool.model.Ocean;
 import com.codecool.model.Ship;

@@ -1,6 +1,6 @@
 package com.codecool.model;
 
-import com.codecool.controller.OceanValidator;
+import com.codecool.oceanManagers.OceanValidator;
 
 import java.util.ArrayList;
 import java.util.List;
