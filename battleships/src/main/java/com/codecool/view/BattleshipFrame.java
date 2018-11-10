@@ -184,7 +184,7 @@ public class BattleshipFrame extends JFrame implements MouseListener, ActionList
         Object source = e.getSource();
         if (source == menuItemHighScore) {
             gameHandler = new GameHandler(1, 1);
-            HighScoreDialog highScoreDialog = new HighScoreDialog(this, gameHandler.getHighscores());
+            HighScoreDialog highScoreDialog = new HighScoreDialog(this, gameHandler.getHighScores());
 
         } else if (source == menuItemNewGame){
             createNewGame();

@@ -117,7 +117,7 @@ public class GameHandler {
     }
 
     public String getHighScores() {
-        List<String> highScoreList = Highscore.getDisplayableHighscoreList();
+        List<String> highScoreList = HighScore.getDisplayableHighScoreList();
         return String.join("\n", highScoreList);
     }
 
@@ -136,6 +136,6 @@ public class GameHandler {
         Player player = (Player) players.get(0);
         String playerName = player.getName();
         int turns = player.getTurns();
-        Highscore.addNewScore(playerName, turns);
+        HighScore.addNewScore(playerName, turns);
     }
 }
