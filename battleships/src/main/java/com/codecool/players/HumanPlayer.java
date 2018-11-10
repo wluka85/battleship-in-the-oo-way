@@ -1,6 +1,7 @@
 package com.codecool.players;
 
 import com.codecool.model.Ocean;
+import com.codecool.oceanManagers.OceanFiller;
 import com.codecool.oceanManagers.ShotResultHandler;
 
 public class HumanPlayer {
@@ -13,6 +14,7 @@ public class HumanPlayer {
 
     public HumanPlayer(Ocean ocean) {
         this.ocean = ocean;
+        OceanFiller.fillEnemyBoard(enemyOcean);
         this.shotResultHandler = new ShotResultHandler(enemyOcean);
     }
 

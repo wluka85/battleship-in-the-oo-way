@@ -3,6 +3,7 @@ package com.codecool.players;
 import com.codecool.model.Ocean;
 import com.codecool.model.Point;
 import com.codecool.model.Ship;
+import com.codecool.oceanManagers.OceanFiller;
 import com.codecool.oceanManagers.OceanValidator;
 import com.codecool.oceanManagers.ShotResultHandler;
 
@@ -16,7 +17,7 @@ public abstract class AI {
 
     public AI(Ocean ocean) {
         this.ocean = ocean;
-        fillEnemyBoard();
+        OceanFiller.fillEnemyBoard(enemyBoard);
         addShipsToOcean();
         shotResultHandler = new ShotResultHandler(enemyBoard);
     }
@@ -26,14 +27,6 @@ public abstract class AI {
     }
 
     public abstract void takeAShoot(Ocean enemyOcean);
-
-    private void fillEnemyBoard() {
-        for (int x = 0; x < Ocean.SIZE; x++) {
-            for (int y = 0; y < Ocean.SIZE; y++) {
-                enemyBoard[x][y] = " ";
-            }
-        }
-    }
 
     private void addShipsToOcean() {
         addShipOfLength(5);
