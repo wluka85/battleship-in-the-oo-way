@@ -1,6 +1,7 @@
 package com.codecool.players;
 
 import com.codecool.model.Ocean;
+import com.codecool.oceanManagers.ShotResultHandler;
 
 public class HumanPlayer {
 
@@ -31,15 +32,7 @@ public class HumanPlayer {
     }
 
     public void updateEnemyOcean(int x, int y, String shootResult) {
-        switch (shootResult) {
-            case "Hit":
-            case "Hit and sunk":
-                enemyOcean[x][y] = "X";
-                break;
-            case "Miss":
-                enemyOcean[x][y] = "O";
-                break;
-        }
+        ShotResultHandler.updateEnemyOcean(x, y, shootResult, enemyOcean);
         turns++;
     }
 }

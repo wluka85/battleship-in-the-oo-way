@@ -1,6 +1,7 @@
 package com.codecool.players.ai;
 
 import com.codecool.model.Ocean;
+import com.codecool.oceanManagers.ShotResultHandler;
 import com.codecool.players.AI;
 
 import java.util.Random;
@@ -26,14 +27,6 @@ public class EasyAI extends AI {
 
         String shootResult = enemyOcean.takeShot(x, y);
 
-        switch (shootResult) {
-            case "Hit":
-            case "Hit and sunk":
-                enemyBoard[x][y] = "X";
-                break;
-            case "Miss":
-                enemyBoard[x][y] = "O";
-                break;
-        }
+        ShotResultHandler.updateEnemyOcean(x, y, shootResult, enemyBoard);
     }
 }

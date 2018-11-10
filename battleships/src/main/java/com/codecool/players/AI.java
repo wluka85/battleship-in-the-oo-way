@@ -4,6 +4,7 @@ import com.codecool.controller.OceanValidator;
 import com.codecool.model.Ocean;
 import com.codecool.model.Point;
 import com.codecool.model.Ship;
+import com.codecool.oceanManagers.ShotResultHandler;
 
 import java.util.Random;
 
