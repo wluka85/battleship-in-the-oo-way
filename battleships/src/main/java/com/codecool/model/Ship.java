@@ -4,26 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
-    /**
-     * 'shipParts'
-     * - list of Square objects which are part of ship (on board)
-     * <p>
-     * 'x'
-     * - 'x' coordinate of first ships square on board
-     * <p>
-     * 'y'
-     * - 'y' coordinate of first ships square on board
-     * <p>
-     * 'shipLength'
-     * - length of ship (number of squares)
-     * <p>
-     * 'vertical'
-     * - information if ship is oriented vertically of horizontally
-     * <p>
-     * 'healthPoints'
-     * - number of health points left
-     */
-
     private List<Square> shipParts = new ArrayList<>();
     private int x;
     private int y;
@@ -31,22 +11,7 @@ public class Ship {
     private boolean vertical;
     private int healthPoints;
 
-    public Ship(int x, int y, int shipLength) {
-        /**
-         * constructor for Ship class (available in 2 versions)
-         */
-        this.x = x;
-        this.y = y;
-        this.shipLength = shipLength;
-        vertical = false;
-        healthPoints = shipLength;
-        makeShip();
-    }
-
     public Ship(int x, int y, int shipLength, boolean vertical) {
-        /**
-         * constructor for Ship class (available in 2 versions)
-         */
         this.x = x;
         this.y = y;
         this.shipLength = shipLength;
@@ -56,11 +21,8 @@ public class Ship {
     }
 
     private void makeShip() {
-        /**
-         * Creates Square objects, and adds them to 'shipParts' list
-         */
         for (int i = 0; i < shipLength; i++) {
-            if (vertical == true)
+            if (vertical)
                 shipParts.add(new Square(x, y + i));
 
             else
@@ -69,51 +31,30 @@ public class Ship {
     }
 
     public int getShipSize() {
-        /**
-         * Returns size of 'shipParts' list
-         */
         return shipParts.size();
     }
 
     public int getXOfSquare(int indexSquare) {
-        /**
-         * returns 'x' coordinate of certain part of ship
-         */
         return shipParts.get(indexSquare).getX();
     }
 
     public int getYOfSquare(int indexSquare) {
-        /**
-         * returns 'y' coordinate of certain part of ship
-         */
         return shipParts.get(indexSquare).getY();
     }
 
     public boolean getVertical() {
-        /**
-         * Accessor method for variable 'vertical'
-         */
         return vertical;
     }
 
-    public void decrementHealthPoints() {
-        /**
-         * Decreases 'healthPoints' variable (int) by 1
-         */
+    void decrementHealthPoints() {
         healthPoints -= 1;
     }
 
-    public int getHealthPoints() {
-        /**
-         * Accessor method for variable 'healthPoints'
-         */
+    int getHealthPoints() {
         return healthPoints;
     }
 
-    public boolean checkIfShip(int x, int y) {
-        /**
-         * Checks if any Ship part (Square) is on X, Y coordinates
-         */
+    boolean checkIfShip(int x, int y) {
         for (int i = 0; i < shipParts.size(); i++) {
             if (getXOfSquare(i) == x && getYOfSquare(i) == y) {
                 return true;
