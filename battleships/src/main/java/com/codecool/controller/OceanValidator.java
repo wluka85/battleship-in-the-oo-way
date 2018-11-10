@@ -1,10 +1,9 @@
 package com.codecool.controller;
 
+import com.codecool.model.Ocean;
 import com.codecool.model.Ship;
 
 public class OceanValidator {
-
-    private static final int OCEAN_SIZE = 10;
     private static int lastPart;
 
     public static boolean validateOcean(String[][] ocean, Ship ship) {
@@ -43,7 +42,7 @@ public class OceanValidator {
           First part checks also if entire ship fits on Ocean (board)
          */
 
-        if (y + 1 < OCEAN_SIZE && ocean[x][y + 1].equals("S")) {
+        if (y + 1 < Ocean.SIZE && ocean[x][y + 1].equals("S")) {
             return false;
         }
 
@@ -57,7 +56,7 @@ public class OceanValidator {
 
         if (part == 0 && x - 1 >= 0) {
             // Check if ship is not too long for this location:
-            if (x + lastPart >= OCEAN_SIZE) {
+            if (x + lastPart >= Ocean.SIZE) {
                 return false;
             }
 
@@ -72,12 +71,12 @@ public class OceanValidator {
             }
 
             // If there is Ship below:
-            if (y + 1 < OCEAN_SIZE && ocean[x - 1][y + 1].equals("S")) {
+            if (y + 1 < Ocean.SIZE && ocean[x - 1][y + 1].equals("S")) {
                 return false;
             }
         }
 
-        if (part == lastPart && x + 1 < OCEAN_SIZE) {
+        if (part == lastPart && x + 1 < Ocean.SIZE) {
             // If there is Ship on right:
             if (ocean[x + 1][y].equals("S")) {
                 return false;
@@ -89,7 +88,7 @@ public class OceanValidator {
             }
 
             // If there is Ship below:
-            return y + 1 >= OCEAN_SIZE || !ocean[x + 1][y + 1].equals("S");
+            return y + 1 >= Ocean.SIZE || !ocean[x + 1][y + 1].equals("S");
         }
         return true;
     }
@@ -106,7 +105,7 @@ public class OceanValidator {
           First part checks also if entire ship fits on Ocean (board)
          */
 
-        if (x + 1 < OCEAN_SIZE && ocean[x + 1][y].equals("S")) {
+        if (x + 1 < Ocean.SIZE && ocean[x + 1][y].equals("S")) {
             return false;
         }
 
@@ -120,7 +119,7 @@ public class OceanValidator {
 
         if (part == 0 && y - 1 >= 0) {
             // Check if ship is not too long for this location:
-            if (y + lastPart >= OCEAN_SIZE) {
+            if (y + lastPart >= Ocean.SIZE) {
                 return false;
             }
 
@@ -135,12 +134,12 @@ public class OceanValidator {
             }
 
             // If there is Ship on top-right:
-            if (x + 1 < OCEAN_SIZE && ocean[x + 1][y - 1].equals("S")) {
+            if (x + 1 < Ocean.SIZE && ocean[x + 1][y - 1].equals("S")) {
                 return false;
             }
         }
 
-        if (part == lastPart && y + 1 < OCEAN_SIZE) {
+        if (part == lastPart && y + 1 < Ocean.SIZE) {
             // If there is Ship on bottom-left:
             if (x - 1 >= 0 && ocean[x - 1][y + 1].equals("S")) {
                 return false;
@@ -152,7 +151,7 @@ public class OceanValidator {
             }
 
             // If there is Ship on bottom-right:
-            return x + 1 >= OCEAN_SIZE || !ocean[x + 1][y + 1].equals("S");
+            return x + 1 >= Ocean.SIZE || !ocean[x + 1][y + 1].equals("S");
         }
 
         return true;
