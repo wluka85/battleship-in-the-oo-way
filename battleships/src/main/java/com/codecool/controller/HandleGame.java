@@ -2,16 +2,17 @@ package com.codecool.controller;
 
 import com.codecool.model.Ocean;
 import com.codecool.players.AI;
+import com.codecool.players.ai.AIFactory;
 import com.codecool.players.Player;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.lang.Object;
+import java.util.List;
 
 public class HandleGame {
 
     private List<Object> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
+    private AIFactory aiFactory = new AIFactory();
 
     public HandleGame(int level1, int level2) {
         /**
@@ -58,8 +59,10 @@ public class HandleGame {
         oceans.add(ocean);
         players.add(new Player(oceans.get(0)));
 
-        oceans.add(new Ocean());
-        players.add(new AI(oceans.get(1), level));
+        Ocean secondPlayerOcean = new Ocean();
+        oceans.add(secondPlayerOcean);
+        AI ai = aiFactory.createAIPlayer(secondPlayerOcean, level);
+        players.add(ai);
 
     }
 
@@ -68,12 +71,15 @@ public class HandleGame {
          * Creates boards for players
          * AI vs AI
          */
-        oceans.add(new Ocean());
-        players.add(new AI(oceans.get(0), level1));
+        Ocean firstPlayerOcean = new Ocean();
+        oceans.add(firstPlayerOcean);
+        AI firstPlayer = aiFactory.createAIPlayer(firstPlayerOcean, level1);
+        players.add(firstPlayer);
 
-        oceans.add(new Ocean());
-        players.add(new AI(oceans.get(1), level2));
-
+        Ocean secondPlayerOcean = new Ocean();
+        oceans.add(secondPlayerOcean);
+        AI secondPlayer = aiFactory.createAIPlayer(secondPlayerOcean, level2);
+        players.add(secondPlayer);
     }
 
     public boolean checkIfGameOver() {
@@ -127,12 +133,12 @@ public class HandleGame {
          * Board numbers:
          * 0 - board containing displayed ships
          * 1 - board with attacked fields marked only
-         * 
+         *
          */
         if (boardNumber == 0) {
             return oceans.get(playerIndex).getOceanBoard();
         } else {
-            if (players.get(playerIndex).getClass().getName().equals("AI")) {
+            if (players.get(playerIndex).getClass().getName().contains("AI")) {
                 AI currentPlayer = (AI) players.get(playerIndex);
                 return currentPlayer.getEnemyBoard();
             } else {
@@ -177,7 +183,7 @@ public class HandleGame {
          * (Used in PvP and AIvAI only)
          */
         Ocean player1Ocean = oceans.get(0);
-        boolean player1Lost= checkOcean(player1Ocean);
+        boolean player1Lost = checkOcean(player1Ocean);
 
         if (players.get(0).getClass().getName().equals("AI")) {
             if (player1Lost) {
