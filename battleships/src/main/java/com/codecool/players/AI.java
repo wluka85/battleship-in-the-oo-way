@@ -6,23 +6,17 @@ import com.codecool.model.Ship;
 
 import java.util.Random;
 
-public class AI {
+public abstract class AI {
 
     private static final int OCEAN_SIZE = 10;
     private String[][] enemyBoard = new String[10][10];
-    public Ocean ocean;
+    private Ocean ocean;
     private int level;
-    private boolean huntMode = false;
-    // huntMode is used only by AI on level 3
 
-    public AI(Ocean ocean, int level) {
-        /**
-         * AI constructor
-         * Saves its ocean and level
-         * 
-         * Ocean stores ships
-         * level determines how AI plays
-         */
+    // huntMode is used only by AI on level 3
+    private boolean huntMode = false;
+
+    public AI(Ocean ocean) {
         this.ocean = ocean;
         this.level = level;
         fillEnemyBoard();
