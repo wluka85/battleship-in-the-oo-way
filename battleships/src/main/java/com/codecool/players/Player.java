@@ -10,53 +10,36 @@ public class Player {
     private String playerName = "MentorBot";
 
     public Player(Ocean ocean) {
-        /**
-         * Constructor for Player objects
-         */
         this.ocean = ocean;
     }
 
     public String[][] getEnemyBoard() {
-        /**
-         * Accessor method for variable 'enemyOcean'
-         */
         return enemyOcean;
     }
 
-    public void updateEnemyOcean(int x, int y, String shootResult) {
-        /**
-         * Method updates 'enemyOcean' accordingly to shootResult
-         */
-        switch (shootResult) {
-        case "Hit":
-        case "Hit and sunk":
-            enemyOcean[x][y] = "X";
-            break;
-        case "Miss":
-            enemyOcean[x][y] = "O";
-            break;
-        }
-        turns++;
-    }
-
     public void setName(String newName) {
-        /**
-         * Method used to change 'playerName' variable
-         */
-        this.playerName = newName;;
+        this.playerName = newName;
+        ;
     }
 
-    public String getName(){
-        /**
-         * Accessor method for variable 'playerName'
-         */
+    public String getName() {
         return this.playerName;
     }
 
     public int getTurns() {
-        /**
-         * Accessor method for variable 'turns'
-         */
         return this.turns;
+    }
+
+    public void updateEnemyOcean(int x, int y, String shootResult) {
+        switch (shootResult) {
+            case "Hit":
+            case "Hit and sunk":
+                enemyOcean[x][y] = "X";
+                break;
+            case "Miss":
+                enemyOcean[x][y] = "O";
+                break;
+        }
+        turns++;
     }
 }
