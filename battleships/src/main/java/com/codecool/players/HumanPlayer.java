@@ -9,9 +9,11 @@ public class HumanPlayer {
     public Ocean ocean;
     private int turns = 0;
     private String playerName = "MentorBot";
+    private ShotResultHandler shotResultHandler;
 
     public HumanPlayer(Ocean ocean) {
         this.ocean = ocean;
+        this.shotResultHandler = new ShotResultHandler(enemyOcean);
     }
 
     public String[][] getEnemyBoard() {
@@ -32,7 +34,7 @@ public class HumanPlayer {
     }
 
     public void updateEnemyOcean(int x, int y, String shootResult) {
-        ShotResultHandler.updateEnemyOcean(x, y, shootResult, enemyOcean);
+        shotResultHandler.smartUpdateEnemyOcean(x, y, shootResult);
         turns++;
     }
 }
