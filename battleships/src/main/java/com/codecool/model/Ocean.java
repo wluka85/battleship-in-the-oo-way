@@ -7,19 +7,15 @@ import java.util.List;
 
 public class Ocean {
     public static int SIZE = 10;
-    private String[][] ocean = new String[SIZE][SIZE];
+    private Board ocean;
     private List<Ship> ships = new ArrayList<>();
 
     public Ocean() {
-        for (int i = 0; i < ocean.length; i++) {
-            for (int j = 0; j < ocean[i].length; j++) {
-                ocean[i][j] = " ";
-            }
-        }
+        this.ocean = new Board();
     }
 
     public void addShip(Ship ship) {
-        boolean valid = OceanValidator.validateOcean(ocean, ship);
+        boolean valid = OceanValidator.validateOcean(ocean.getBoard(), ship);
         if (valid) {
             ships.add(ship);
             addShipToOcean(ship);
@@ -27,6 +23,7 @@ public class Ocean {
     }
 
     private void addShipToOcean(Ship ship) {
+        String[][] ocean = this.ocean.getBoard();
         for (int i = 0; i < ship.getShipSize(); i++) {
             int indexX = ship.getXOfSquare(i);
             int indexY = ship.getYOfSquare(i);
@@ -35,6 +32,7 @@ public class Ocean {
     }
 
     public String takeShot(int x, int y) {
+        String[][] ocean = this.ocean.getBoard();
         if (ocean[x][y].equals("S")) {
             ocean[x][y] = "X";
             int hitShip = -1;
@@ -56,6 +54,6 @@ public class Ocean {
     }
 
     public String[][] getOceanBoard() {
-        return ocean;
+        return ocean.getBoard();
     }
 }

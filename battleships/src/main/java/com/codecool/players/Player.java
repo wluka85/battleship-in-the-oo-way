@@ -1,23 +1,22 @@
 package com.codecool.players;
 
+import com.codecool.model.Board;
 import com.codecool.model.Ocean;
-import com.codecool.oceanManagers.OceanFiller;
 import com.codecool.oceanManagers.ShotResultHandler;
 
 public abstract class Player {
-    protected String[][] enemyBoard;
+    protected Board enemyBoard;
     protected Ocean ocean;
     protected ShotResultHandler shotResultHandler;
     private int turns = 0;
 
     public Player(Ocean ocean) {
         this.ocean = ocean;
-        enemyBoard = new String[Ocean.SIZE][Ocean.SIZE];
-        OceanFiller.fillEnemyBoard(enemyBoard);
-        shotResultHandler = new ShotResultHandler(enemyBoard);
+        enemyBoard = new Board();
+        shotResultHandler = new ShotResultHandler(enemyBoard.getBoard());
     }
 
-    public String[][] getEnemyBoard() {
+    public Board getEnemyBoard() {
         return enemyBoard;
     }
 

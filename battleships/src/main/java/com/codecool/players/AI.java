@@ -1,5 +1,6 @@
 package com.codecool.players;
 
+import com.codecool.model.Board;
 import com.codecool.model.Ocean;
 import com.codecool.model.Point;
 import com.codecool.model.Ship;
@@ -18,7 +19,7 @@ public abstract class AI extends Player {
 
     public abstract void takeAShoot(Ocean enemyOcean);
 
-    public String[][] getEnemyBoard() {
+    public Board getEnemyBoard() {
         return enemyBoard;
     }
 
@@ -52,7 +53,7 @@ public abstract class AI extends Player {
             x = generator.nextInt(Ocean.SIZE);
             y = generator.nextInt(Ocean.SIZE);
 
-            isWater = enemyBoard[x][y].equals(" ") && countUncheckedAdjacent(x, y) != 0;
+            isWater = enemyBoard.getBoard()[x][y].equals(" ") && countUncheckedAdjacent(x, y) != 0;
 
         } while (!isWater);
         return new Point(x, y);
@@ -61,7 +62,7 @@ public abstract class AI extends Player {
     protected void attackDamagedShip(Ocean enemyOcean) {
         for (int x = 0; x < Ocean.SIZE; x++) {
             for (int y = 0; y < Ocean.SIZE; y++) {
-                if (enemyBoard[x][y].equals("X") && hasUncheckedAdjacent(x, y)) {
+                if (enemyBoard.getBoard()[x][y].equals("X") && hasUncheckedAdjacent(x, y)) {
                     attackAdjacent(x, y, enemyOcean);
                     return;
                 }
@@ -74,19 +75,19 @@ public abstract class AI extends Player {
     }
 
     private boolean uncheckedLeft(int x, int y) {
-        return (x - 1 >= 0 && enemyBoard[x - 1][y].equals(" "));
+        return (x - 1 >= 0 && enemyBoard.getBoard()[x - 1][y].equals(" "));
     }
 
     private boolean uncheckedRight(int x, int y) {
-        return (x + 1 < Ocean.SIZE && enemyBoard[x + 1][y].equals(" "));
+        return (x + 1 < Ocean.SIZE && enemyBoard.getBoard()[x + 1][y].equals(" "));
     }
 
     private boolean uncheckedTop(int x, int y) {
-        return (y - 1 >= 0 && enemyBoard[x][y - 1].equals(" "));
+        return (y - 1 >= 0 && enemyBoard.getBoard()[x][y - 1].equals(" "));
     }
 
     private boolean uncheckedBottom(int x, int y) {
-        return (y + 1 < Ocean.SIZE && enemyBoard[x][y + 1].equals(" "));
+        return (y + 1 < Ocean.SIZE && enemyBoard.getBoard()[x][y + 1].equals(" "));
     }
 
     protected void attackAdjacent(int x, int y, Ocean enemyOcean) {

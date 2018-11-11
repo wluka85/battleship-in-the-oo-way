@@ -62,10 +62,10 @@ public class GameHandler {
     public boolean checkIfGameOver() {
         Ocean ocean1 = oceans.get(0);
         Ocean ocean2 = oceans.get(1);
-        return (checkOcean(ocean1) || checkOcean(ocean2));
+        return (isFleetDestroyed(ocean1) || isFleetDestroyed(ocean2));
     }
 
-    private boolean checkOcean(Ocean ocean) {
+    private boolean isFleetDestroyed(Ocean ocean) {
         String[][] board = ocean.getOceanBoard();
         for (String[] row : board) {
             for (String square : row) {
@@ -100,14 +100,8 @@ public class GameHandler {
         if (boardNumber == 0) {
             return oceans.get(playerIndex).getOceanBoard();
         } else {
-            if (players.get(playerIndex).getClass().getName().contains("AI")) {
-                AI currentPlayer = (AI) players.get(playerIndex);
-                return currentPlayer.getEnemyBoard();
-            } else {
-                HumanPlayer currentHumanPlayer = (HumanPlayer) players.get(playerIndex);
-                return currentHumanPlayer.getEnemyBoard();
-            }
-
+            Player player = players.get(playerIndex);
+            return player.getEnemyBoard().getBoard();
         }
     }
 
@@ -122,8 +116,8 @@ public class GameHandler {
     }
 
     public String getGameResult() {
-        Ocean player1Ocean = oceans.get(0);
-        boolean player1Lost = checkOcean(player1Ocean);
+        Ocean ocean = oceans.get(0);
+        boolean player1Lost = isFleetDestroyed(ocean);
 
         if (player1Lost) {
             return "Player 2 won!";

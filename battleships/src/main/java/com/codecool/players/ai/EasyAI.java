@@ -20,7 +20,7 @@ public class EasyAI extends AI {
             x = generator.nextInt(Ocean.SIZE);
             y = generator.nextInt(Ocean.SIZE);
 
-            isWater = enemyBoard[x][y].equals(" ");
+            isWater = enemyBoard.getBoard()[x][y].equals(" ");
 
         } while (!isWater);
 
