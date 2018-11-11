@@ -3,30 +3,24 @@ package com.codecool.players;
 import com.codecool.model.Ocean;
 import com.codecool.model.Point;
 import com.codecool.model.Ship;
-import com.codecool.oceanManagers.OceanFiller;
 import com.codecool.oceanManagers.OceanValidator;
-import com.codecool.oceanManagers.ShotResultHandler;
 
 import java.util.Random;
 
-public abstract class AI {
-    protected String[][] enemyBoard = new String[Ocean.SIZE][Ocean.SIZE];
-    protected Ocean ocean;
-    protected ShotResultHandler shotResultHandler;
+public abstract class AI extends Player {
+
     protected boolean huntMode;
 
     public AI(Ocean ocean) {
-        this.ocean = ocean;
-        OceanFiller.fillEnemyBoard(enemyBoard);
+        super(ocean);
         addShipsToOcean();
-        shotResultHandler = new ShotResultHandler(enemyBoard);
     }
+
+    public abstract void takeAShoot(Ocean enemyOcean);
 
     public String[][] getEnemyBoard() {
         return enemyBoard;
     }
-
-    public abstract void takeAShoot(Ocean enemyOcean);
 
     private void addShipsToOcean() {
         addShipOfLength(5);

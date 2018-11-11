@@ -3,6 +3,7 @@ package com.codecool.controller;
 import com.codecool.model.Ocean;
 import com.codecool.players.AI;
 import com.codecool.players.HumanPlayer;
+import com.codecool.players.Player;
 import com.codecool.players.ai.AIFactory;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class GameHandler {
 
-    private List<Object> players = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
     private List<Ocean> oceans = new ArrayList<>();
     private AIFactory aiFactory = new AIFactory();
 
@@ -81,9 +82,8 @@ public class GameHandler {
         int nextPlayerIndex = getNextPlayerIndex(currentPlayerIndex);
         String result = oceans.get(nextPlayerIndex).takeShot(x, y);
 
-        //TODO refactor HumanPlayer and AI classes to avoid casting
-        HumanPlayer currentHumanPlayer = (HumanPlayer) players.get(currentPlayerIndex);
-        currentHumanPlayer.updateEnemyOcean(x, y, result);
+        Player humanPlayer = players.get(currentPlayerIndex);
+        humanPlayer.updateEnemyOcean(x, y, result);
     }
 
     public void takeATurn(int playerIndex) {
